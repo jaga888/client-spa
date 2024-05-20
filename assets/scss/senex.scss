@@ -1,64 +1,1284 @@
-@import "senex/utility/functions";
-@import "senex/utility/mixins";
-@import "senex/utility/extends";
+@import "bootstrap";
+// @import '~@fortawesome/fontawesome-pro/css/all.css';
 
-@import "senex/config/config";
-@import "senex/base/base";
+@import "print";
+@import "tag";
+@import "button";
+@import "senex-status";
+@import "senex-flags";
+@import "senex-claims";
+@import "senex-strip";
+@import "senex-tooltip";
+@import "senex/scrollbar";
+@import "senex/dropzone";
+@import "senex/sign";
+@import "senex/announcement";
+@import "senex/page";
+@import "senex/modals";
+@import "note";
 
-@import "select2/dist/css/select2";
-@import "senex/vendor/select2";
-@import "senex/vendor/megamenu";
-@import "senex/vendor/datetimepicker";
-@import "senex/vendor/dropzone";
-@import "senex/vendor/high90-columns";
-@import "senex/vendor/high90-marquee";
-@import "senex/vendor/high90-shine";
-@import "senex/vendor/high90-shade";
-@import "senex/vendor/simplemde";
+// Old Compass defaults.
+// Remove as necessary.
+// ---------------------------------------------------------------------
+/* line 24, ../../../../../../../../usr/local/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ul {
+  list-style: none;
+}
 
-@import "senex/modules/files";
-@import "senex/modules/button";
-@import "senex/modules/icon";
-@import "senex/modules/header";
-@import "senex/modules/footer";
-@import "senex/modules/body";
-@import "senex/modules/menu";
-@import "senex/modules/strip";
-@import "senex/modules/sidebar";
-@import "senex/modules/tags";
-@import "senex/modules/card";
-@import "senex/modules/list";
-@import "senex/modules/charges";
-@import "senex/modules/form";
-@import "senex/modules/file";
-@import "senex/modules/user";
-@import "senex/modules/contact-information";
-@import "senex/modules/detail-menu";
-@import "senex/modules/scoper";
-@import "senex/modules/calendar";
-@import "senex/modules/help";
-@import "senex/modules/sketch";
-@import "senex/modules/claim";
-@import "senex/modules/modal";
-@import "senex/modules/policies";
-@import "senex/modules/documents-texts";
-@import "senex/modules/courtdate-calendar";
-@import "senex/modules/column";
-@import "senex/modules/dialog";
-@import "senex/modules/theme";
-@import "senex/modules/version";
-@import "senex/modules/editor";
-@import "senex/modules/markdown";
-@import "senex/modules/accordion";
-@import "senex/modules/swatch-picker";
+/* line 28, ../../../../../../../../usr/local/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
 
-@import "senex/pages/login";
-@import "senex/pages/error";
-@import "senex/pages/landing";
-@import "senex/pages/signatures";
+/* line 32, ../../../../../../../../usr/local/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
 
-@import "senex/themes/senex";
-@import "senex/themes/senexlaw";
-@import "senex/themes/bwpf";
-@import "senex/themes/wmci";
-@import "senex/themes/80s";
+/* Colors --------------------------------------------------------------*/
+$header-bg: #000000;
+$header-fg: #EEEEEE;
+
+$home-color: #FFFFFF;
+$processing-color: #1088CB;
+$reporting-color: #FF8600;
+$accounting-color: #50B254;
+$administration-color: #BBBBBB;
+
+$backdrop-color: #F5F5F5;
+$background-color: #FFFFFF;
+$sidebar-color: #F5F5F5;
+$active-module-color: #eee;
+$background-tooltip: #BDBDBD;
+
+$processed-color: #1088CB;
+$draft-color: #FFEE77;
+$waiting-color: #DDD;
+$revise-color: #FF8600;
+$declined-color: #AA0000;
+$satisfied-color: #FFF;
+$expired-color: #000;
+$ready-approved-color: #50B254;
+
+$current-application-color: $processing-color;
+/* ---------------------------------------------------------------------*/
+html {
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  font-family: "proxima-nova", sans-serif;
+  font-size: 12pt;
+  // min-width: 800px;
+  background-color: $gray-200;
+  color: $gray-800;
+  .senex-fa-spinner {
+    position: fixed;
+    width: 54px;
+    height: 54px;
+    top: 45%;
+    left: 50%;
+    z-index: 10000;
+    i, svg {
+      font-size: 54px;
+    }
+    animation: color-change 3s infinite;
+  }
+
+  @keyframes color-change {
+    0% { color: black; }
+    25% { color: grey; }
+    50% { color: lightgray; }
+    75% { color: grey; }
+    100% { color: black; }
+  }
+
+  .loader-process {
+    position: initial;
+    height: auto;
+  }
+
+  label {
+    &.required {
+      &:after {
+        content: '*';
+        color: #b12323;
+        font-size: 12pt;
+        margin: 0 5px;
+        line-height: 0;
+      }
+    }
+  }
+}
+
+strong {
+  font-weight: bold;
+}
+
+table {
+  vertical-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+html, body, #container {
+  height: 100%;
+}
+
+#container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  overflow: hidden;
+  -ms-overflow-style: scrollbar;
+}
+
+#menu {
+  flex: 0 0 auto;
+}
+
+#main {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+#footer {
+  flex: 0 0 20px;
+
+  width: 100%;
+  height: 20px;
+
+  background-color: $gray-200;
+  border-top: 1px solid #aaa;
+  font-size: 0.8em;
+
+  .senex__version {
+    float: right;
+    color: #bbb;
+    margin: 0 5px 0 0;
+  }
+}
+
+.saving:after {
+  float: left;
+  font-family: "Font Awesome 5 Pro", FontAwesome;
+  content: "\F021";
+  display: inline-block;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+  color: #00a8ff;
+  padding: 0 5px 0 0;
+}
+
+.saved:after {
+  float: left;
+  font-family: "Font Awesome 5 Pro", FontAwesome;
+  content: "\F00C";
+  display: inline-block;
+  color: color("green");
+  padding: 0 5px 0 0;
+}
+
+.small-text {
+  font-size: 0.8em;
+}
+
+a {
+  color: $blue;
+  text-decoration: none;
+}
+
+.tooltip-inner {
+  color: #fff;
+  background-color: $blue;
+}
+.tooltip.bs-tooltip-right .arrow:before {
+  border-right-color: $blue !important;
+}
+.tooltip.bs-tooltip-left .arrow:before {
+  border-left-color: $blue !important;
+}
+.tooltip.bs-tooltip-bottom .arrow:before {
+  border-bottom-color: $blue !important;
+}
+.tooltip.bs-tooltip-top .arrow:before {
+  border-top-color: $blue !important;
+}
+
+.message-notice-i {
+  position: relative;
+  color: #1088CB;
+  font-weight: bold;
+  .ico {
+    font-size: 14px;
+  }
+  #text {
+    vertical-align: middle;
+    cursor: default;
+    margin-left: 5px;
+  }
+}
+
+// Claim Table
+.dataTables_filter, .dataTables_info {display: none;}
+table.claims, table.docket {
+  width: 100%;
+
+  thead {
+  }
+
+  th {
+    background-color: #fafafa;
+    color: $gray-500;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 5px 5px;
+    text-align: center;
+  }
+
+  .message {
+    border-radius: 5px;
+
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 3px;
+    font-size: 0.8em;
+    margin: 2px 10px;
+    padding: 4px 10px 4px 10px;
+  }
+  .message-danger {
+    background-color: #000;
+    color: #ffffff;
+  }
+  .message-warning {
+    border: 1px solid #800;
+    background-color: #a00;
+    color: #ffffff;
+  }
+  .message-caution {
+    background-color: #ffee66;
+    border: 1px solid #fd7;
+    color: #333;
+  }
+  .message-notice {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    color: #666;
+  }
+}
+
+.two-pane {
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  align-items: stretch;
+  justify-content: space-between;
+  overflow: hidden;
+
+
+  #right-column {
+    flex: 1 1 0;
+    width: 100%; // IE11.
+    overflow: auto;
+    background-color: $gray-200;
+
+    .right-header {
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: auto 100%;
+    }
+
+    h1.unit-name {
+      display: block;
+      font-size: 16px;
+      color: #000;
+      margin: 10px 0px 10px;
+      font-weight: bold;
+    }
+
+    .nothing-found {
+
+      p {
+        width: 250px;
+        margin: 125px auto 300px;
+        background-color: $gray-300;
+        border-radius: 10px;
+        text-align: center;
+        color: $gray-600;
+        padding: 25px 50px;
+        line-height: 1.5em;
+      }
+    }
+
+    .notice {
+      display: none;
+
+      a {
+        display: block;
+
+      }
+    }
+
+    table.tablesorter, table.users {
+
+      & > thead tr th {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        font-size: 12px;
+      }
+
+      th {
+        white-space: nowrap;
+        font-weight: normal;
+        text-align: center;
+
+        &.sort.asc::after {
+          font-size: 0.5em;
+          content: '\25B2';
+          padding-left: 2px;
+        }
+
+        &.sort.desc::after {
+          font-size: 0.5em;
+          content: '\25BC';
+          padding-left: 2px;
+        }
+
+        &.header:hover {
+          background-color: #1088CB;
+          color: #fff;
+          cursor: pointer;
+        }
+
+        &.header {
+          &:after {
+            font-size: 0.65em;
+            content: '\25BC';
+            color: #83E587;
+            padding-left: 4px;
+          }
+          &.headerSortUp {
+            &:after {
+              content: '\25B2';
+              color: #fff;
+            }
+          }
+
+          &.headerSortDown {
+            &:after {
+              content: '\25BC';
+              color: #fff;
+            }
+          }
+        }
+
+        &.sort:hover {
+          background-color: #1088CB;
+          color: #fff;
+          cursor: pointer;
+        }
+
+        &.headerSortUp, &.headerSortDown {
+          background-color: #1088CB;
+          color: #fff;
+        }
+      }
+
+      tr {
+        &.senex__rwr-report-table__claim {
+          td {
+            padding: 5px;
+
+            &.senex__table__claim-select {
+              width: 20px;
+            }
+
+            &.senex__table__claim-id {
+              width: 100px;
+            }
+
+          }
+        }
+
+        &.odd {
+        }
+
+        &.even {
+        }
+
+        @mixin claim-status-style($bg-color, $text-color, $hover-color: null) {
+          background-color: $bg-color;
+          color: $text-color;
+
+          &:hover {
+            background-color: if($hover-color, $hover-color, darken($bg-color, 10%));
+          }
+        }
+
+        $claim-status-classes: (
+                processed: $processed-color,
+                draft: $draft-color,
+                waiting: $waiting-color,
+                revise: $revise-color,
+                declined: $declined-color,
+                satisfied: $satisfied-color,
+                expired: $expired-color,
+                approved: $ready-approved-color,
+                ready: $ready-approved-color
+        );
+
+        @each $status-class, $color in $claim-status-classes {
+          &.claim.#{$status-class} .claim-status {
+            @if ($status-class == satisfied){
+              @include claim-status-style($color, black, darken($color, 1%));
+            } @else if ($status-class == draft) {
+              @include claim-status-style($color, black);
+            } @else if ($status-class == waiting) {
+              @include claim-status-style($color, black);
+            } @else {
+              @include claim-status-style($color, white);
+            }
+          }
+        }
+      }
+
+
+      .senex__satisfaction__date--processed {
+        background-color: $processed-color;
+        color: white;
+        padding: 2px 5px;
+      }
+
+      td {
+        &.check, &.check-blank {
+          text-align: left;
+          font-size: 12px;
+          font-weight: bold;
+
+          .ltgrey {
+            font-weight: normal;
+            padding-bottom: 3px;
+          }
+        }
+
+        &.claim {
+          text-align: center;
+          padding: 0px;
+
+          a {
+            display: block;
+            padding: 5px;
+
+            .claim-number {
+              color: $gray-700;
+              font-weight: bold;
+              font-size: 14px;
+            }
+
+            img {
+              padding: 5px;
+            }
+
+            .claim-status {
+              padding: 5px 10px;
+              margin: 3px 0px;
+              font-size: 12px;
+              border-radius: 5px;
+              cursor: pointer;
+              display: inline-block;
+              font-weight: bold;
+            }
+          }
+        }
+
+        .resident {
+          font-weight: bold;
+          padding: 0px 0px 2px 15px;
+          font-size: 14px;
+        }
+
+        .unit {
+          color: $gray-600;
+          font-size: 12px;
+        }
+
+        .lease-on-file-block {
+          border-radius: 5px;
+          border-size: 1px;
+          font-size: 11px;
+          margin: 2px 10px;
+          padding: 4px 10px 4px 10px;
+        }
+
+        .lease-on-file-label {
+          border-color: rgba(black, 0.025);
+          background-color: #FFEE66;
+          color: #666666;
+
+          &:before {
+            font-family: 'Pictos', sans-serif;
+          }
+        }
+
+        .amended-block {
+          border-radius: 5px;
+          border-size: 1px;
+          font-size: 11px;
+          margin: 2px 10px;
+          padding: 4px 10px 4px 10px;
+        }
+
+        .amended-label {
+          border-color: rgba(black, 0.025);
+          background-color: #336699;
+          color: #ffffff;
+
+          &:before {
+            font-family: 'Pictos', sans-serif;
+          }
+        }
+
+        &.military {
+          font-size: 10px;
+        }
+
+        &.last-update {
+
+          max-width: 280px;
+          font-size: 11px;
+
+          table {
+            margin: 0 auto;
+
+            td {
+              background-color: transparent;
+
+            }
+
+            tr.request-reminder {
+              td {
+                background-color: transparent;
+                color: red;
+                border: 0px;
+              }
+            }
+
+          }
+
+        }
+
+        &.dob {
+          div {
+
+            margin: 0 auto;
+          }
+        }
+
+        &.ssn {
+          div {
+            margin: 0 auto;
+          }
+        }
+
+        &.amount-table {
+
+          text-align: center;
+          border-left: none;
+          border-right: none;
+
+          table {
+
+            margin: 0px auto;
+
+            td.amount,
+            td.variance,
+            td.amended,
+            td.awarded-blank {
+              text-align: right;
+              font-weight: bold;
+              color: #333;
+              background-color: #eee;
+              font-size: 12px;
+              border: none;
+              padding: 1px 5px 1px 10px;
+              width: 65px;
+            }
+
+            td.awarded {
+              text-align: right;
+              font-weight: bold;
+              color: #333;
+              background-color: #ff8600;
+              font-size: 12px;
+              border: none;
+              border-right: 1px solid #ff8600;
+              padding: 1px 5px 1px 10px;
+              width: 65px;
+            }
+
+            td.hidden {
+              display: none;
+            }
+
+            td.amount-label {
+              background-color: #e1e1e1;
+              font-size: 12px;
+              border: none;
+              padding: 1px 10px 1px 5px;
+              width: 65px;
+            }
+
+            tr.total {
+
+              td {
+                color: #333;
+                background-color: #e1e1e1;
+                padding-top: 3px;
+                padding-bottom: 3px;
+
+                &.amount {
+
+                }
+
+                &.amount-label {
+                  color: #333;
+                  background-color: darken(#e1e1e1, 5%);
+                }
+
+                &.awarded {
+                  color: #eee;
+                  background-color: darken(#ff8600, 5%);
+                  border-right: 1px solid darken(#ff8600, 5%);
+                  border-bottom: 1px solid darken(#ff8600, 5%);
+                }
+
+              }
+
+
+            }
+
+            tr.rental-period {
+              background-color: #555;
+
+              td {
+                border: 1px solid #555;
+                background-color: #555;
+                color: #eee;
+              }
+
+              td.orange {
+                border: 1px solid darken(#ff8600, 5%);
+                background-color: darken(#ff8600, 5%);
+              }
+            }
+
+          }
+
+          a {
+            display: block;
+            padding: 2px 0px 0px;
+            font-size: 12px;
+          }
+
+        }
+
+        &.date {
+          text-align: center;
+
+          input {
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            outline: none;
+            padding: 3px 5px;
+          }
+
+          .clear-satisfaction-date {
+            font-size: 12px;
+          }
+        }
+
+        &.outcome-table {
+
+          min-width: 250px;
+
+          .outcome-select {
+            margin: 0px auto;
+            padding: 10px 0px;
+            font-size: 12px;
+          }
+
+          table {
+            border: 1px solid #ddd;
+            margin: 0px auto;
+            width: 100%;
+            height: 100%;
+          }
+
+          td {
+            border: none;
+            padding: 5px;
+            font-size: 12px;
+          }
+
+          .desired {
+
+            td.desired-label {
+              text-align: right;
+              background-color: #e1e1e1;
+            }
+
+            td.desired-value {
+              background-color: #eee;
+              font-weight: bold;
+              width: 100%;
+            }
+          }
+
+          .actual {
+
+            td.pending-label {
+              text-align: right;
+              background-color: #e1e1e1;
+            }
+
+            td.pending-value {
+              background-color: #eee;
+              font-weight: bold;
+            }
+
+            td.actual-label {
+              text-align: right;
+              color: #eee;
+              background-color: darken(#ff8600, 5%);
+            }
+
+            td.actual-value {
+              color: #fff;
+              font-weight: bold;
+              background-color: #ff8600;
+            }
+          }
+
+          tr.rental-period {
+            background-color: #555;
+
+            td {
+              background-color: #555;
+              color: #eee;
+            }
+          }
+        }
+
+        &.notes {
+          text-align: center;
+          font-size: 10px;
+        }
+
+        .hidden-sort {
+          display: none;
+        }
+      }
+    }
+
+  }
+
+  .button-cell .transfer-records-wrapper {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+
+    .transfer-records-name {
+      width: 57%;
+    }
+
+    .transfer-records-info {
+      display: flex;
+      flex-flow: column;
+      width: 43%;
+      align-items: center;
+      justify-content: center;
+
+      .transfer-date, .transfer-loading {
+        display: inline-block;
+        font-size: 12px;
+      }
+      .transfer-loading {
+        text-align: center;
+      }
+    }
+  }
+
+
+  #left-column {
+    flex: 0 0 300px;
+    overflow: auto;
+    background-color: $gray-300;
+
+    .law-logo {
+      margin-top: 0;
+      padding: 1rem 3rem;
+      text-align: center;
+
+      a {
+        display: block;
+      }
+    }
+
+    .admin-law-logo {
+      height: 70px;
+    }
+
+    h2,h3 {
+      display: block;
+      color: $gray-600;
+      padding: 10px 15px;
+      background-color: $gray-400;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    a.button.transferRecords {
+      border-bottom: 0;
+    }
+    a.button {
+      display: block;
+      color: #555;
+      padding: 10px 10px 10px 15px;
+      font-size: 14px;
+      font-weight: bold;
+      border-bottom: 1px solid #ccc;
+
+      &:hover {
+        background-color: rgba(0,0,0,0.05);
+        text-decoration: none;
+      }
+
+      img {
+        position: relative;
+        top: 2px;
+        margin-top: -2px;
+        margin-right: 5px;
+      }
+
+      &.not-yet, &.working, &.fauxtify {
+        color: #777;
+      }
+
+      &.send-request-disabled,
+      &.disabled{
+        color: #bbb;
+        cursor: not-allowed;
+      }
+
+      &.request-noncompliance:hover, &.notify:hover {
+        background-color: rgba(80,178,84,0.2);
+      }
+
+      &.fauxtify:hover {
+        background-color: rgba(178,80,84,0.2);
+      }
+
+      &.save-progress:hover {
+        background-color: rgba(0,150,225,0.2);
+      }
+
+      &.hidden {
+        display: none;
+      }
+    }
+
+    ol {
+      list-style-type: decimal;
+      margin-left: 30px;
+      padding: 15px 0px 10px;
+
+      li {
+        font-size: 12px;
+        padding: 0px 30px 10px 5px;
+        color: #555;
+      }
+
+    }
+
+    .instructions.text-block {
+      margin: -15px 0 0 0;
+      font-size: 12px;
+      padding: 0 20px 5px 20px;
+      color: #555;
+    }
+
+    .note, .questions, .court, {
+
+      .court-date {
+        display: block;
+        color: #555;
+        padding: 10px 20px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .text-block {
+        margin: 0;
+        font-size: 12px;
+        padding: 5px 20px 5px 20px;
+        color: #555;
+      }
+
+      .cutoff-date {
+        text-align: left;
+        color: #555;
+        padding: 0px 20px 10px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .note-text, .cutoff-text {
+        font-size: 12px;
+        padding: 5px 20px 10px 20px;
+        color: #555;
+      }
+
+      .law-firm {
+
+        padding-bottom: 10px;
+
+        h4 {
+          display: block;
+          color: #555;
+          padding: 10px 20px 5px;
+          font-size: 13px;
+          font-weight: bold;
+        }
+
+        p {
+          font-size: 12px;
+          padding: 0px 20px 2px 20px;
+          color: #555;
+        }
+
+        p.address {
+          margin-bottom: 5px;
+        }
+      }
+
+
+    }
+
+    .locked {
+      margin: 10px;
+      background-color: darken(#a00, 5%);
+
+      h3 {
+        display: block;
+        color: #fff;
+        font-weight: bold;
+        background-color: #a00;
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .locked-text {
+        font-size: 12px;
+        padding: 5px 20px 10px 20px;
+        color: #fff;
+        margin: 0;
+      }
+
+    }
+
+    .unlocked {
+      margin: 10px;
+      background-color: darken(#1088CB, 5%);
+
+      h3 {
+        display: block;
+        color: #fff;
+        font-weight: bold;
+        background-color: #1088CB;
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .unlocked-text {
+        font-size: 12px;
+        padding: 5px 20px 10px 20px;
+        color: #fff;
+      }
+
+    }
+
+    .buttons, .filters {
+      display: none;
+    }
+
+    table.claims {
+      display: none;
+    }
+  }
+
+  .clear {
+    clear: left;
+  }
+}
+
+#dialog-form-update-variance {
+  td.variance input {
+    display: none;
+  }
+
+  td.amended {
+    text-align: right;
+    input {
+      display: none;
+    }
+  }
+  &.variance {
+    td.variance input {
+      display: block;
+    }
+  }
+
+  &.amended {
+    tr.spreadsheet td.amended {
+      input {
+        text-align: right;
+        display: block;
+        float:right;
+        clear:both;
+      }
+    }
+  }
+
+  &.hide-amended {
+    th.final, td.final, th.amended, td.amended, .amending-form {
+      display: none;
+    }
+  }
+}
+
+// The C in CSS stands for evil.
+.two-pane #right-column table.tablesorter td.amount-table table.senex__claim__amount-summary ,
+.two-pane #right-column table.users td.amount-table table.senex__claim__amount-summary {
+  border: 0;
+
+  th {
+    background: transparent;
+    font-weight: bold;
+    text-shadow: none;
+    text-align: right;
+  }
+
+  tr.totals {
+    background-color: rgba(black, 0.1);
+  }
+
+  td {
+    border: 0;
+    font-size: 0.8rem;
+  }
+
+  td.amount {
+    background-color: transparent;
+  }
+
+  td.total {
+    background-color: rgba(black, 0.05);
+  }
+}
+
+// Help
+.help {
+  &__title {
+    padding: 0.5rem 0;
+    font-size: 1.75rem;
+    font-weight: bold;
+    border-bottom: 2px solid #11a8df;
+  }
+
+  h1 {
+    clear: both;
+    padding: 0.5rem 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  h2 {
+    clear: both;
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  h3 {
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  h4, h5, h6 {
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    font-style: italic;
+    font-weight: normal;
+  }
+
+  p {
+    padding: 0.25rem 0;
+  }
+
+  img {
+  }
+
+  &__image {
+
+    &--full {
+      clear: both;
+      width: 100%;
+      padding: 1rem;
+    }
+
+    &--right {
+      clear: both;
+      float: right;
+      width: 50%;
+      padding: 1rem;
+    }
+
+    &--left {
+      clear: both;
+      float: left;
+      width: 50%;
+      padding: 1rem;
+    }
+  }
+
+  .clear {
+
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  ul {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
+
+    li {
+      display: list-item;
+      padding: 0.25rem 0;
+    }
+    li:before {
+      content: "";
+      position:relative;
+      left: -8px;
+      background-color: #11a8df;
+
+      display:inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius:50%
+    }
+  }
+} // End Help.
+
+.menu__button--badged {
+  line-height: 40px;
+  i.fa {
+    line-height: 40px;
+  }
+}
+
+.edit-tooltip {
+  padding: 7px 11px;
+  display: none;
+  position: absolute;
+  bottom: 32px;
+  left: -12px;
+  background-color: $background-tooltip;
+  border-radius: 8px;
+  text-align: left;
+  opacity: .9;
+}
+
+.edit-tooltip_text {
+  font-size: 14px;
+  color: $black;
+  font-weight: normal;
+}
+
+.edit-tooltip_triangle {
+  position: absolute;
+  display: none;
+  top: -7px;
+  right: 97px;
+  border: 10px solid transparent;
+  border-top: 10px solid $background-tooltip;
+  opacity: .9;
+}
+
+.edited-info {
+  width: 115px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.edited-info_hover{
+  width: 120px;
+  height: 16px;
+  position: absolute;
+  top: 5px;
+  border-radius: 16px;
+}
+
+.modal-backdrop.front {
+  z-index: $zindex-modal;
+}
+
+.modal {
+  .modal-dialog {
+    .modal-content {
+      max-height: 90vh;
+    }
+  }
+}
+
+.senex__tag {
+  display: inline-block;
+  border-radius: 100px;
+  border-width: 2px;
+  border-style: solid;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0.1rem 0.3rem;
+  margin: 0.3rem;
+  border-color: #999;
+  color: #999;
+}
+
+.info-icon {
+  position: relative;
+  &:after {
+    content: '\24D8';
+    color: #2888cb;
+    position: absolute;
+    top: 5%;
+    right: 20%;
+  }
+}

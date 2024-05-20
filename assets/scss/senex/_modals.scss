@@ -1,0 +1,190 @@
+.modal-dialog {
+    .modal-content {
+        .modal-body {
+            li {
+                .edit-mode {
+                    display: none;
+
+                    form {
+                        label {
+                            font-size: 14px;
+                        }
+
+                        select {
+                            max-width: 160px;
+                            margin-bottom: 10px;
+                        }
+
+                        .buttons {
+                            width: 100%;
+
+                            button {
+                                display: inline-block;
+                                color: white;
+                                background-color: #1088CB;
+                                border: none;
+                                border-radius: 5px;
+                                padding: 4px 10px;
+                                margin: 2px 10px;
+                                font-size: 13px;
+                                font-weight: 700;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+
+                .actions {
+                    position: absolute;
+                    min-width: 15px;
+                    min-height: 15px;
+                    right: 10px;
+                    top: 20px;
+                    cursor: pointer;
+
+                    .actions-set {
+                        background-color: #fff;
+                        padding: 5px 10px;
+                        margin: -5px -10px;
+                        -webkit-box-shadow: 2px 2px 10px -6px rgba(0, 0, 0, 0.75);
+                        -moz-box-shadow: 2px 2px 10px -6px rgba(0, 0, 0, 0.75);
+                        box-shadow: 2px 2px 10px -6px rgba(0, 0, 0, 0.75);
+
+                        svg {
+                            &:not(:first-child) {
+                                margin-left: 15px;
+                            }
+
+                            &:hover {
+                                color: #bf2e2e;
+                                transition-duration: 0.4s;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.add-guarantor-address-dialog {
+    width: 580px;
+    max-width: 580px;
+
+    .modal-content {
+        .modal-body {
+            .guarantors-addresses-form {
+                table {
+                    tr {
+                        &.unit-name {
+                            td {
+                                font-weight: 700;
+                                color: #4c4c4c;
+                            }
+                        }
+
+                        &.unit-row {
+                            td {
+                                border: 2px solid #8ba1c2;
+                                background-color: #ecf9ff;
+                                padding: 5px 0;
+
+                                .unit-guarantor-section {
+                                    &:not(:last-child) {
+                                        border-bottom: 1px dashed;
+                                        padding: 0 0 10px;
+                                    }
+
+                                    .guarantor-name {
+                                        text-align: center;
+                                        font-weight: 700;
+                                    }
+
+                                    .address-section {
+                                        .section-row {
+                                            display: flex;
+                                            flex-direction: row;
+                                            flex-grow: 0;
+                                            width: 100%;
+                                            justify-content: space-between;
+                                            padding: 5px 13px;
+
+                                            .input-wrapper {
+                                                position: relative;
+                                                margin: 0 20px 0 0;
+
+                                                label {
+                                                    margin: 0 5px 0 0;
+                                                    font-size: 88%;
+                                                    color: #323131;
+                                                }
+
+                                                input {
+                                                    &[type=text] {
+                                                        height: 25px;
+                                                        color: #323131;
+                                                    }
+
+                                                    &.error {
+                                                        border-color: #e14545;
+                                                    }
+                                                }
+                                            }
+
+                                            &.buttons-section {
+                                                justify-content: center;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .address-section {
+                    .section-row {
+                        &:first-child {
+                            .input-wrapper {
+                                width: 100%;
+                            }
+                        }
+
+                        .input-wrapper {
+                            .tenant-address {
+                                width: 100%;
+                            }
+
+                            .tenant-city, .tenant-state, .tenant-zip {
+                                width: 120px;
+                            }
+
+                            .no-address {
+                                margin-right: 10px;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+
+                .validation-errors {
+                    position: absolute;
+                    bottom: -15px;
+                    color: #a71212;
+                    font-size: 12px;
+                    margin-left: 5px;
+                }
+            }
+        }
+
+        .modal-footer {
+            .no-address-footer-msg {
+                color: #0973af;
+                line-height: 0.9;
+                font-size: 14px;
+                text-align: justify;
+                padding: 0 10px 5px;
+            }
+        }
+    }
+}

@@ -1,0 +1,169 @@
+@mixin tag($color: #666) {
+  @include border-radius(95px);
+  // @include text-shadow(transparent 0px 0px 0px);
+
+  background-color: $color;
+  $textcolor: #ffffff;
+  @if lightness($color) > 50% {
+    $textcolor: #000000;
+    }
+    color: $textcolor;
+  
+  display: inline-block;
+  font-size: 0.9em;
+  font-weight: normal;
+  margin: 0 2px 0 4px;
+  padding: 1px 8px;
+
+}
+
+.senex__tag__military {
+
+  white-space: nowrap;
+
+  &:after {
+    transition: all 0.1s ease;
+    content: 'disagree?';
+    width: 0;
+    opacity: 0;
+    float: right;
+    color: #fb0;
+  }
+
+  &:hover{
+    &:after {
+      transition: all 0.5s ease;
+      width: auto;
+      opacity: 1;
+      padding: 0 5px;
+      font-weight: bold;
+    }
+  }
+
+
+  &--tbd {
+    color: #1781C6;
+    font-style: italic;
+    padding: 1px 5px;
+
+    &:before {
+      content: 'mil: TBD';
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+
+  &--unknown {
+    @include tag(#F89F59);
+    cursor: pointer;
+
+    &:before {
+      content: 'mil: UNK.';
+    }
+    &:after {
+      color: #ffffff;
+    }
+  }
+
+  &--no {
+    @include tag(#FFFFFF);
+    cursor: pointer;
+
+    &:before {
+      content: 'mil: NO';
+    }
+    &:after {
+      color: #1781C6;
+    }
+
+  }
+
+  &--yes {
+    @include tag(#000000);
+    cursor: pointer;
+    
+    &:before {
+      content: 'mil: YES';
+    }
+  }
+
+  &--under-review {
+    cursor: help;
+
+    &:after {
+      content: 'Under Review';
+    }
+
+    .senex__tag__military--hand {
+      display: inline-block !important;
+    }
+  }
+}
+
+.tag-military {
+  @include tag(#000000);
+  &:before {
+    content: 'mil';
+  }
+  
+  cursor: pointer;
+
+  &:after {
+    transition: all 0.1s ease;
+    content: 'disagree?';
+    width: 0;
+    opacity: 0;
+    float: right;
+  }
+
+  &:hover{
+    &:after {
+      transition: all 0.5s ease;
+      width: auto;
+      opacity: 1;
+      padding: 0 5px;
+      color: #fb0;
+      font-weight: bold;
+    }
+  }
+}
+
+.tag-not-military {
+  @include tag(#FFF);
+  &:before {
+    content: 'not-mil';
+  }
+
+  cursor: pointer;
+
+  &:after {
+    transition: all 0.1s ease;
+    content: 'disagree?';
+    width: 0;
+    opacity: 0;
+    float: right;
+  }
+
+  &:hover{
+    &:after {
+      transition: all 0.5s ease;
+      width: auto;
+      opacity: 1;
+      padding: 0 5px;
+      color: #1781C6;
+      font-weight: bold;
+    }
+  }
+}
+
+.tag-warning {
+  @include tag(#aa0000);
+}
+.tag-cosigner {
+  @include tag(#e5e5ee);
+  &:after {
+    content: 'cosigner';
+  }
+}

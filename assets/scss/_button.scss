@@ -1,0 +1,38 @@
+// $color is background color of element button will be sitting on. 
+@mixin button($background-color: #ddd) {
+
+	.button, button {
+		
+		border-radius: 5px;
+		// @include background-image(linear-gradient($background-color, darken($background-color, 5%)));
+    background-color: $background-color;
+
+		$button-text-color: '';
+		@if lightness($background-color) > 60% {
+			// @include text-shadow(lighten($background-color, 40%) 0px 1px 0px);
+			$button-text-color: darken($background-color, 50%);
+    	} @else {
+			// @include text-shadow(darken($background-color, 40%) 0px -1px 0px);
+			$button-text-color: lighten($background-color, 50%);
+    	}
+    	color: $button-text-color;
+ 
+		// border: 1px solid darken($background-color, 20%);
+		cursor: pointer;
+		display: inline-block;
+		font-weight: bold;
+		margin: 0;
+
+		&:hover {
+			// @include background-image(linear-gradient(darken($background-color, 5%), darken($background-color, 10%)));
+      background-color: darken($background-color, 5%);
+		}
+
+		&.active {
+			
+		}
+
+	}
+
+}
+

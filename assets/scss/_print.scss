@@ -1,0 +1,40 @@
+@media print {
+  @page { 
+    size: auto;  
+    margin: 0;
+  }
+
+  body, #container {
+    height: auto;
+    margin: 1cm;
+  }
+
+  * {
+    overflow: visible !important;
+  }
+
+  #container {
+  }
+
+  .senex__announcement__bar {
+    display: none;
+  }
+
+  #main {
+
+  }
+
+  #left-column {
+    display: none;
+  }
+
+  #right-column {
+
+  }
+
+  #footer {
+    display: none;
+  }
+
+}
+

@@ -1,0 +1,27 @@
+.senex__sign {
+
+  &__signaturepad {
+    width: 100%;
+    height: auto;
+    min-height: 160px;
+
+    border: 0.1rem solid $gray-900;
+    border-radius: 0.5rem;
+    background-color: white;
+  }
+
+  &__signature {
+    &--from-text {
+      text-align: center;
+      font-size: 2.5rem;
+      font-family: Cookie, cursive;
+    }
+  }
+}
+
+.sign-validation-error {
+  padding-left: 10px;
+  border: 1px solid #800;
+  background-color: #a00;
+  color: #ffffff;
+}

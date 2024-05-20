@@ -1,0 +1,111 @@
+// This is the button to open a tooltip.
+// TODO: Rename.
+.senex__tooltip-help {
+  &__button {
+    color: #4EB8E5;
+    cursor: help;
+  }
+}
+
+// tippy global styles. 
+.senex__tooltip {
+  &__header {
+
+  }
+  &__body {
+
+  }
+  &__footer {
+
+  }
+  h1,h2,h3,h4,h5,h6,.title {
+
+  }
+  p {
+
+  }
+  textarea {
+    font-size: 0.9rem;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #eee;
+    box-sizing: border-box;
+  }
+  &__button {
+
+    border-radius: 5px;
+    border: 0;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    font-weight: bold;
+
+    &--submit {
+      color: #ffffff;
+      background-color: #229944;
+    }
+
+    &--cancel {
+      color: #999;
+      background-color: #ddd;
+    }
+
+  }
+  
+}
+
+
+// .tippy-popper[data-html] .tippy-tooltip {
+//   padding: 2rem;
+//   box-shadow: 0 4px 80px -8px rgba(0, 20, 60, 0.25);
+//   max-width: 400px;
+//   border-radius: 10px;
+// }
+
+// senex__tooltip-help Theme.
+.tippy-tooltip {
+  &.help-theme {
+    background-color: white;
+    border-radius: 0;
+    box-shadow: 0 4px 80px -8px rgba(0, 20, 20, 0.55);
+    max-width: 400px;
+    color: #666666;
+    padding: 20px;
+
+    .tippy-arrow {
+      fill: white;
+    }
+
+    .tippy-content {
+      h1,h2,h3,h4,h5,.title {
+        font-size: 1.2rem;
+        color: #4EB8E5;
+        padding: 5px 0;
+        text-align: left;
+        font-weight: 600;
+      }
+      p {
+        font-size: 0.9 rem;
+        line-height: 1.5;
+        padding: 5px 0;
+        text-align: left;
+        color: #444;
+      }
+      button {
+
+      }
+    }
+  }
+}
+.tippy-popper[x-placement^=top] .tippy-tooltip.help-theme .tippy-arrow {
+  border-top-color: white;
+}
+.tippy-popper[x-placement^=bottom] .tippy-tooltip.help-theme .tippy-arrow {
+  border-bottom-color: white;
+}
+.tippy-popper[x-placement^=left] .tippy-tooltip.help-theme .tippy-arrow {
+  border-left-color: white;
+}
+.tippy-popper[x-placement^=right] .tippy-tooltip.help-theme .tippy-arrow {
+  border-right-color: white;
+}

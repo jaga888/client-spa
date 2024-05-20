@@ -1,0 +1,15 @@
+@import "color-variables";
+
+.note-error {
+  margin-top: 8px;
+  margin-bottom: 0px;
+  display: none;
+  text-align: center;
+  font-size: 13px;
+  color: $text-note-color;
+}
+
+.form-control-red:focus {
+  border:1px solid $border-note-color;
+  box-shadow: 0 0 0 3px $shadow-note-color;
+}

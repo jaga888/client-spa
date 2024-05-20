@@ -1,21 +1,32 @@
 <style lang="scss">
-@use "/assets/css/tailwind.css";
 @use "/assets/scss/senex.scss";
 </style>
 
 <template>
-  <div class="senex__template senex__theme--senex senex__page--login">
-    <div class="senex__template__header">
-    </div>
-
-    <div class="senex__template__body">
+  <div id="container">
+    <div id="main" class="two-pane">
       <slot/>
     </div>
-
-    <div class="high90__marquee senex__theme-only">
-      <div class="">
-        <span>*** GET SENEX POWERED TODAY!!! *** CALL (757) 744-9435 NOW!! *** Support is standing by ***</span>
+    <div id="footer">
+      <div class="senex__version">
+        3.7.12
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+definePageMeta({
+  layout: 'login',
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/',
+  }
+})
+
+useHead({
+  bodyAttrs: {
+    class: 'senex__page__login',
+  },
+});
+</script>

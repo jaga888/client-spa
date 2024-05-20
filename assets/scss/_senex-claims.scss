@@ -1,0 +1,279 @@
+// Too much specificity in core Stylesheet.
+// Override.
+.two-pane #right-column table.tablesorter {
+    &.senex__claims {
+        .senex__claim {
+            border-bottom: 1px solid rgba(black, 0.1);
+            td {
+                border: 0;
+                padding: 5px 10px;
+            }
+            &:nth-child(2n) {
+                background-color: $gray-100;
+            }
+            td.check,
+            td.check-blank {
+                background-color: rgba(0, 0, 0, 0.05);
+                white-space: nowrap;
+            }
+            td.claim {
+                background-color: rgba(0, 0, 0, 0.025);
+                white-space: nowrap;
+                .claim-number {
+                    font-size: 17px;
+                }
+            }
+            td.notes {
+                a.add-note {
+                    cursor: pointer;
+                }
+            }
+            .senex__claim__info {
+                padding: 5px 15px;
+                width: 100%;
+
+                .senex__claim__residents {
+                    .senex__claim__resident {
+                        .resident.is_flagged {
+                            .resident-name-wrapper, .resident-flag-reasons {
+                                font-weight: bold;
+                                color: #AA0000 !important;
+
+                                svg path {
+                                    color: #AA0000 !important;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .senex__claim__flags {
+                    .has-flagged-tenants-warning {
+                        svg path, span {
+                            color: #FF8600 !important;
+                        }
+                    }
+                }
+            }
+            &__unit {
+                font-weight: 700;
+                font-size: 15px;
+                color: rgba(0, 0, 0, 0.7);
+                padding: 10px 0 2px 0px;
+            }
+            &__residents {
+                margin-left: 10px;
+                background-color: $gray-300;
+                border-radius: 10px;
+                margin: 10px 0 5px 0px;
+                // Hacking padding for table.
+                tr:first-child {
+                    td {
+                        padding-top: 10px;
+                    }
+                    td:last-child {
+                        border-top-right-radius: 10px;
+                    }
+                }
+                tr:last-child {
+                    td {
+                        padding-bottom: 10px;
+                    }
+                }
+                tr {
+                    td:first-child {
+                        // Handled in resident-name-wrapper
+                    }
+                    td:last-child {
+                        padding-right: 10px;
+                    }
+                }
+            }
+            &__amounts {
+                .claim-update-amounts-button {
+                    display: inline-block;
+                    color: white;
+                    background-color: #1088CB;
+                    border-radius: 5px;
+                    padding: 4px 10px;
+                    margin: 2px 10px;
+                    font-size: 13px;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+            }
+            &__resident {
+                // Override old stuff;
+                .resident {
+                    background: none;
+                    padding: 5px 0;
+                    font-weight: normal;
+                }
+                .resident-name-wrapper {
+                    background-color: #e0e0e0;
+                    padding: 0 5px 0 15px;
+                    display: inline-block;
+                    line-height: 1.4;
+                }
+                td.ssn,
+                td.dob {
+                    white-space: nowrap;
+                    text-align: right;
+                    background-color: #e0e0e0;
+                }
+                input.ssn,
+                input.dob {
+                    padding: 2px 4px;
+                    font-size: 0.8rem;
+                    border: 1px solid white;
+                    border-radius: 3px;
+                    border: 2px solid #dadada;
+                    &:placeholder-shown {}
+                    &::placeholder {
+                        color: #c00;
+                    }
+                    &:invalid {
+                        border: 2px solid #C00;
+                        margin: 0;
+                        color: #c00;
+                        // by default, all placeholders in Firefox have an opacity value applied to them
+                        opacity: 1;
+                    }
+                }
+                .ssn_button,
+                .dob_button {
+                    text-align: center;
+                    width: 16px;
+                    display: inline-block;
+                }
+                .ssn-unavailable-checkbox,
+                .dob-unavailable-checkbox {
+                    display: none;
+                }
+                input.dob:invalid~.dob-unavailable-checkbox,
+                input.ssn:invalid~.ssn-unavailable-checkbox {
+                    display: inline;
+                }
+                input.dob:invalid~.dob_button,
+                input.ssn:invalid~.ssn_button {
+                    display: none;
+                }
+                .pii-unavailable:after {
+                    font-style: italic;
+                    color: #888;
+                    padding: 0 5px;
+                }
+                &--dob-unavailable {
+                    input.dob {
+                        display: none;
+                    }
+                    .dob .pii-unavailable:after {
+                        content: 'unavailable';
+                    }
+                }
+                &--ssn-unavailable {
+                    input.ssn {
+                        display: none;
+                    }
+                    .ssn .pii-unavailable:after {
+                        content: 'unavailable';
+                    }
+                }
+                &--is-minor {
+                    input.dob {
+                        border-color: #FF8600;
+                    }
+                }
+            }
+            &__pii-help {
+                * {
+                    text-align: right;
+                    color: #1781C6;
+                }
+            }
+            &__flags {
+                padding: 5px 0;
+                .flag-claim-not-requested,
+                .flag-claim-has-minors,
+                .flag-claim-pii-incomplete {
+                    display: none;
+                }
+            }
+            // Hide PII for claims that are not Ready, Approved, or Processed.
+            &.waiting,
+            &.declined,
+            &.expired {
+                .senex__claim__resident {
+                    background: none;
+                }
+                td.dob,
+                td.ssn,
+                tr.senex__claim__pii-help {
+                    display: none;
+                }
+            }
+            // Only show missing PII & minor resident flags for Ready, Approved, or Processed
+            &.ready,
+            &.approved,
+            &.processed {
+                .senex__claim__residents {
+                    &--pii-incomplete~.senex__claim__flags .flag-claim-pii-incomplete {
+                        display: block;
+                    }
+                    &--has-minors~.senex__claim__flags .flag-claim-has-minors {
+                        display: block;
+                    }
+                }
+            }
+            &.ready,
+            &.revise {
+                .flag-claim-not-requested {
+                    display: block;
+                }
+            }
+            // Declined & Expired claims are dimmed
+            &.declined,
+            &.expired {
+                .senex__claim__info,
+                .senex__claim__amounts {
+                    * {
+                        color: #bbb !important;
+                    }
+
+                    .senex__claim__flags {
+                        .has-flagged-tenants-warning {
+                            svg path, span {
+                                color: #FF8600 !important;
+                            }
+                        }
+                    }
+                }
+            }
+            &.declined,
+            &.expired {
+                .senex__claim__info .editable_content,
+                .senex__claim__amounts .editable_content {
+                    * {
+                        color: #000 !important;
+                    }
+
+                    .senex__claim__flags {
+                        .has-flagged-tenants-warning {
+                            svg path, span {
+                                color: #FF8600 !important;
+                            }
+                        }
+                    }
+                }
+            }
+        } // .senex__claim
+        // Processing-type specific claim tables.
+        &--ud {
+            .senex__claim__resident {
+                background-image: url(/media/images/dotdotdot.png);
+                background-repeat: repeat-x;
+                background-position: center;
+            }
+        }
+    } // .senex__claims
+} // End wrapper

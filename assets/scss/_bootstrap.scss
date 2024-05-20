@@ -1,0 +1,65 @@
+// Set variables.
+
+// Colors
+$blue:                              #1088CB;
+$green:                             #50B254;
+$orange:                            #FF8600;
+
+// Typography
+$font-size-base:                    0.8rem;
+
+// Button + Forms
+
+// Buttons
+
+// Dropdowns
+$dropdown-link-hover-color:         inherit;
+$dropdown-link-hover-bg:            rgba(black, 0.05);
+
+// Modals
+$modal-inner-padding:               1rem 2rem;
+$modal-content-border-width:        0;
+$modal-content-border-radius:       0;
+
+$modal-backdrop-opacity:            0.6;
+$modal-content-box-shadow-sm-up:    0 0 5rem rgba(black, 0.1);
+
+// Close
+$close-color:                       white;
+$close-text-shadow:                 none;
+
+// Import default Bootstrap styles.
+@import "/node_modules/bootstrap/scss/bootstrap";
+
+// Global overrides
+
+@each $color, $value in $grays {
+  @include text-emphasis-variant(".text-gray-#{$color}", $value);
+}
+
+.text-white-25 { color: rgba(white, 0.25) !important; }
+
+// Import custom Bootstrap component styles
+// @import "bootstrap/modal"
+.modal-dialog {
+  overflow-y: initial !important;//added by fariha 3-16-21
+  .modal-content {
+    background-color: $gray-100;
+    box-shadow: 0 0 2rem 1rem rgba(0,0,0, 0.1);
+  }
+
+  .modal-header {
+    background-color: color("blue");
+    color: white;
+  }
+
+  .modal-body {
+    height: 80vh;//added by fariha 3-16-21
+    overflow-y: auto;//added by fariha 3-16-21
+  }
+
+  .modal-footer {
+    padding: 0.5rem;
+  }
+  
+}

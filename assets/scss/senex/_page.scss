@@ -1,0 +1,120 @@
+// Page-specific styles.
+
+.senex__page__login,
+.senex__page__error { 
+  top: 0;
+  bottom: 0;
+  background-image: url('/media/images/bg/senex-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  #footer {
+    background-color: transparent;
+    border: none;
+    height: auto;
+
+    .senex__version {
+      color: white;
+    }
+  }
+}
+
+.senex__page__notice {
+  .right-header {
+    background-image: url('/media/images/header/notice.png');
+    background-color: #61c46e;
+    color: white;
+  }
+  .tablesorter > thead tr th {
+    background-color: darken(#61c46e, 10%);
+    color: white;
+  }
+  .text-message {
+    text-align: center;
+    margin-top: 50px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+
+.senex__page__summons {
+  .right-header {
+    background-image: url('/media/images/header/summons.png');
+    background-color: #f47b50;
+    color: white;
+  }
+  .tablesorter > thead tr th {
+    background-color: darken(#f47b50, 10%);
+    color: white;
+  }
+}
+
+.senex__page__docket {
+  .right-header {
+    background-image: url('/media/images/header/docket.png');
+    background-color: #48b9e5;
+    color: white;
+  }
+  .tablesorter > thead tr th {
+    background-color: darken(#48b9e5, 10%);
+    color: white;
+  }
+}
+
+.senex__page__possession {
+  .right-header {
+    background-image: url('/media/images/header/possession.png');
+    background-color: #998675;
+    color: white;
+  }
+  .tablesorter > thead tr th {
+    background-color: darken(#998675, 10%);
+    color: white;
+  }
+}
+
+.senex__page__satisfaction {
+  .right-header {
+    background-image: url('/media/images/header/satisfaction.png');
+    background-color: #a4dce8;
+    color: white;
+  }
+  .tablesorter > thead tr th {
+    background-color: darken(#a4dce8, 10%);
+    color: white;
+  }
+}
+
+.senex__page__report-reservation {
+  .right-header {
+    background-color: lighten($blue, 30%);
+    color: white;
+  }
+  .tablesorter > thead tr th {
+    background-color: lighten($blue, 20%);
+    color: white;
+  }
+}
+
+.senex__page__report-judgment {
+  .right-header {
+    background-color: lighten($blue, 30%);
+    color: white;
+  }
+  .tablesorter > thead tr th {
+    background-color: lighten($blue, 20%);
+    color: white;
+  }
+}
+
+.senex__page__admin-user {
+  .right-header {
+    background-color: lighten($blue, 30%);
+    color: white;
+  }
+  .tablesorter > thead tr th {
+    background-color: lighten($blue, 20%);
+    color: white;
+  }
+}

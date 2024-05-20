@@ -1,0 +1,44 @@
+.senex__flags {
+}
+
+.senex__flag {
+  border-radius: 5px;
+  border-size: 1px;
+  font-size: 100%;
+  padding: 4px 0px;
+
+  &:before {
+    margin-right: 5px;
+  }
+
+  &--info {
+    color: #1088CB;
+    font-weight: bold;
+  }
+
+  &--warn {
+    color: #FF8600;
+    font-weight: bold;
+  }
+
+  &--error {
+    color: #CC0000;
+    font-weight: bold;
+
+    &:before {
+      display: none;
+      content: "\f071";
+      font-family: 'Font Awesome 5 Solid';
+    }
+  }
+
+  &--fatal {
+    background-color: #CC0000;
+    color: #FFF;
+    font-weight: bold;
+  }
+
+  &--with-help {
+    cursor: help;
+  }
+}

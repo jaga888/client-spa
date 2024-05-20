@@ -1,0 +1,31 @@
+.senex__dropzone {
+  background-color: $gray-200;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+
+  &:after {
+  }
+
+  &.dz-drag-hover {
+    background-color: #ccc;
+  }
+  
+  &__previews {
+    padding: 0.25rem 0;
+
+
+  }
+
+  &__preview {
+    padding: 0.25rem 0;
+  
+  }
+
+  &__filename {
+
+  }
+
+}
+

@@ -1,0 +1,23 @@
+.senex__strip {
+
+  display: flex;
+  flex-flow: row nowrap;
+
+  & > * {
+    display: inline-block;
+    flex: 1 1 auto;
+  }
+
+  &__left {
+    text-align: left;
+  }
+
+  &__center {
+    text-align: center;
+  }
+
+  &__right {
+    text-align: right;
+  }
+
+}

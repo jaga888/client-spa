@@ -1,0 +1,15 @@
+.senex__announcement {
+  &__bar {
+    flex: 0 0 40px;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 50px;
+    background-color: #FF8600;
+    color: white;
+}}
