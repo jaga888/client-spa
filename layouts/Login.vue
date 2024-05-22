@@ -16,13 +16,6 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: 'login',
-  auth: {
-    unauthenticatedOnly: true,
-    navigateAuthenticatedTo: '/',
-  }
-})
 
 useHead({
   bodyAttrs: {
