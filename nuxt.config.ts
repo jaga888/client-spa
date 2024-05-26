@@ -30,6 +30,13 @@ export default defineNuxtConfig({
     auth: {
         provider: {
             type: "local",
+            endpoints: {
+                signIn: {path: '/login', method: 'post'},
+                getSession: {path: '/session', method: 'get'}
+            },
+            pages: {
+                login: '/account/login'
+            },
             "sessionDataType": {
                 id: "number",
                 first_name: "string",
@@ -40,7 +47,10 @@ export default defineNuxtConfig({
             }
         },
         baseURL: process.env.HOST_API,
-        globalAppMiddleware: true
+        globalAppMiddleware: {
+            isEnabled: true,
+            allow404WithoutAuth: false,
+        },
     },
     devtools: {
         enabled: true

@@ -15,7 +15,6 @@
                required/>
         <div class="invalid-feedback" v-if="v$.email.$error">
           {{ v$.email.$errors[0].$message }}
-          <!--          <span v-if="errorMessages.email">{{ errorMessages.email[0] }}</span>-->
         </div>
       </div>
       <div class="form-group">
@@ -32,14 +31,15 @@
         />
 
       </div>
+      <div class="text-danger" v-if="$externalResults.message">
+        {{ $externalResults.message }}
+      </div>
+
       <div class="btn-toolbar justify-content-between">
         <button type="submit" class="btn btn-primary">Login</button>
         <a class="btn btn-link" href="/">Forgot my password</a>
       </div>
 
-      <div class="invalid-feedback" v-if="v$.password.$error">
-        {{ v$.password.$errors[0].$message }}
-      </div>
     </form>
   </div>
 </template>
@@ -49,7 +49,6 @@ import {required, email} from '@vuelidate/validators';
 import {useVuelidate} from "@vuelidate/core";
 import type {UserLogin} from "~/services/user/types";
 
-const form = ref();
 const {
   signIn, token
 } = useAuth();
@@ -59,21 +58,28 @@ const user = ref<UserLogin>({
   password: "",
 });
 
-const errorMessages = ref({});
+const $externalResults = ref({})
 
 const rules = {
   email: {required, email},
   password: {required},
 };
 
-const v$ = useVuelidate(rules, user);
+const v$ = useVuelidate(rules, user, {$externalResults});
 
 const submitForm = async () => {
-  await v$.value.$validate();
-  if (!v$.value.$error) {
-    await signIn(user.value).catch(
+  v$.value.$clearExternalResults();
+
+  const result = await v$.value.$validate();
+
+  if (result) {
+    await signIn(user.value, {callbackUrl: '/'}).catch(
         (error: any) => {
-          errorMessages.value = error.response.data?.errors;
+          if (error.response?.status === 422) {
+            $externalResults.value = error.response._data?.errors;
+          } else if (error.response?.status === 400) {
+            $externalResults.value = error.response._data;
+          }
         }
     );
   }
