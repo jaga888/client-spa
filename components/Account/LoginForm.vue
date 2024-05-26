@@ -1,7 +1,6 @@
 <template>
   <div class="card-body">
-    <form id="senex-login-form" action="/" method="post" novalidate
-          @submit.prevent="submitForm" ref="form">
+    <form id="senex-login-form" action="/public" method="post" @submit.prevent="submitForm">
       <div class="form-group">
         <label for="username">Email</label>
         <input type="email"
@@ -37,7 +36,7 @@
 
       <div class="btn-toolbar justify-content-between">
         <button type="submit" class="btn btn-primary">Login</button>
-        <a class="btn btn-link" href="/">Forgot my password</a>
+        <a class="btn btn-link" href="/account/reset">Forgot my password</a>
       </div>
 
     </form>
