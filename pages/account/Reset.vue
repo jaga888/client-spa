@@ -6,7 +6,7 @@
           <div class="p-5 card-header bg-primary text-white" style="text-align: center;">
             <img id="login_img" src="/media/images/logo/senex.svg" alt=""/>
           </div>
-          <ResetPassword></ResetPassword>
+          <AccountResetPassword></AccountResetPassword>
         </div>
       </div>
     </div>

@@ -28,15 +28,18 @@
                :class="{ 'is-invalid': v$.password.$error }"
                required
         />
-
+        <div class="invalid-feedback" v-if="v$.password.$error">
+          {{ v$.password.$errors[0].$message }}
+        </div>
       </div>
+
       <div class="text-danger" v-if="$externalResults.message">
         {{ $externalResults.message }}
       </div>
 
       <div class="btn-toolbar justify-content-between">
         <button type="submit" class="btn btn-primary">Login</button>
-        <a class="btn btn-link" href="/account/reset">Forgot my password</a>
+        <NuxtLink class="btn btn-link" to="/account/reset">Forgot my password</NuxtLink>
       </div>
 
     </form>

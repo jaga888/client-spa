@@ -15,7 +15,7 @@
       </div>
       <div class="btn-toolbar justify-content-between">
         <button type="submit" class="btn btn-primary">Reset Password</button>
-        <a class="btn btn-link" href="/account/login">Cancel</a>
+        <NuxtLink class="btn btn-link" to="/account/login">Cancel</NuxtLink>
       </div>
     </form>
   </div>
