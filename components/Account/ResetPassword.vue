@@ -49,17 +49,7 @@ const submitForm = async () => {
 
   if (validated) {
     try {
-      const response = (await userService.forgotPasswordApi(user.value.email).then((data) => data.json()).then(function (data) {
-        console.log(response)
-        console.log(response.data)
-        $externalResults.value = response.data;
-        console.log($externalResults.value)
-        return response;
-
-      }));
-      // console.log(response);
-      // console.log(response.data._rawValue);
-      // $externalResults.value = response.data;
+      $externalResults.value = <ForgotPassword>(await userService.forgotPasswordApi(user.value.email));
     } catch (e: any) {
       $externalResults.value = e.response._data;
     }
