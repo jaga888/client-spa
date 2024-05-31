@@ -19,6 +19,9 @@
       <div v-if="$externalResults.message" class="alert alert-danger" role="alert">
         {{ $externalResults.message }}
       </div>
+      <div v-if="successMessage.show" class="alert alert-success" role="alert">
+        Password updated successfully
+      </div>
       <div class="btn-toolbar justify-content-between">
         <button type="submit" class="btn btn-primary">Reset Password</button>
         <NuxtLink class="btn btn-link" to="/account/login">Cancel</NuxtLink>
@@ -37,7 +40,13 @@ const user = ref<UserResetPassword>({
   email: "",
 });
 
-const $externalResults = ref({});
+const $externalResults = ref<ForgotPassword>({
+  'message': ''
+});
+
+const successMessage = ref({
+  show: false
+});
 
 const rules = {
   email: {required, email},
@@ -49,7 +58,8 @@ const submitForm = async () => {
 
   if (validated) {
     try {
-      $externalResults.value = <ForgotPassword>(await userService.forgotPasswordApi(user.value.email));
+      <ForgotPassword>(await userService.forgotPasswordApi(user.value.email));
+      successMessage.value.show = true;
     } catch (e: any) {
       $externalResults.value = e.response._data;
     }
