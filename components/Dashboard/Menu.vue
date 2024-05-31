@@ -112,16 +112,20 @@
             </a>
           </div>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"
+        <li class="nav-item dropdown active" @click="toggleDropdown">
+          <a class="nav-link dropdown-toggle active"
              href="#" id="accountDropdown"
              role="button"
              aria-haspopup="true"
              aria-expanded="false"
           >
-            Admin Greenbrier
+            {{ user.first_name }} {{ user.last_name }}
           </a>
-          <div class="border-0 bg-primary dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
+          <div
+              :class="{'border-0 bg-primary dropdown-menu dropdown-menu-right': true, 'show': isDropdownActive}"
+              aria-labelledby="
+              accountDropdown
+          ">
             <a class="text-white dropdown-item"
                id="account-settings" href="#">
               <i class="text-white-25 fas mr-2 fa-key"></i>
@@ -132,8 +136,7 @@
               <i class="text-white-25 fas mr-2 fa-pencil"></i>
               Update Signature
             </a>
-            <a class="text-white dropdown-item"
-               href="#">
+            <a class="text-white dropdown-item" href="" @click="logout">
               <i class="text-white-25 fas mr-2 fa-coffee"></i>
               Logout
             </a>
@@ -145,4 +148,21 @@
 </template>
 
 <script setup lang="ts">
+import type {UserProfile} from "~/services/user/profile";
+
+const {data, signOut} = useAuth();
+
+const isDropdownActive = ref(false);
+
+const user = ref<UserProfile>({
+  first_name: data.value?.first_name || '',
+  last_name: data.value?.last_name || '',
+});
+const toggleDropdown = () => {
+  isDropdownActive.value = !isDropdownActive.value;
+};
+
+const logout = async () => {
+  await signOut();
+};
 </script>
