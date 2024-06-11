@@ -4,12 +4,12 @@
       <div class="col-12 col-md-6 col-lg-4">
         <Announcement/>
       </div>
-      <div class="col-12 col-md-6 col-lg-4 ">
-        <ProcessingStatus/>
-      </div>
-      <div class="col-12 col-sm-12 col-lg-4 ">
-        <NoticeReport/>
-      </div>
+<!--      <div class="col-12 col-md-6 col-lg-4 ">-->
+<!--        <ProcessingStatus/>-->
+<!--      </div>-->
+<!--      <div class="col-12 col-sm-12 col-lg-4 ">-->
+<!--        <NoticeReport/>-->
+<!--      </div>-->
     </div>
   </div>
 </template>

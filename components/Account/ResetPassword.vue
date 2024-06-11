@@ -54,6 +54,8 @@ const rules = {
 
 const v$ = useVuelidate(rules, user, {$externalResults});
 const submitForm = async () => {
+  v$.value.$clearExternalResults();
+
   const validated = await v$.value.$validate();
 
   if (validated) {
