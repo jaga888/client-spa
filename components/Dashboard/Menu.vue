@@ -127,7 +127,7 @@
               accountDropdown
           ">
             <a class="text-white dropdown-item"
-               id="account-settings" href="#">
+               id="account-settings" href="#" @click.prevent="showModal">
               <i class="text-white-25 fas mr-2 fa-key"></i>
               Change Password
             </a>
@@ -145,12 +145,21 @@
       </ul>
     </div>
   </nav>
+  <Modal
+      :isModalOpen="isModalOpen"
+      @close="closeModal"
+  />
 </template>
 
 <script setup lang="ts">
-import type {UserProfile} from "~/services/user/profile";
+import {ref} from 'vue';
+import type {UserProfile} from "~/services/user/types";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Modal from "~/components/Modal.vue";
 
 const {data, signOut} = useAuth();
+
+const isModalOpen = ref(false);
 
 const isDropdownActive = ref(false);
 
@@ -165,4 +174,15 @@ const toggleDropdown = () => {
 const logout = async () => {
   await signOut();
 };
+const showModal = () => {
+  isModalOpen.value = true;
+};
+
+const closeModal = () => {
+  isModalOpen.value = false;
+};
+
 </script>
+<style>
+
+</style>
