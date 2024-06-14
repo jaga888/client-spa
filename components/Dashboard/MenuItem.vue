@@ -14,7 +14,8 @@
           {{ user.first_name + ' ' + user.last_name }}
         </span>
       <span v-else-if="menuItem.id === 'announcement'">
-          <i class="fas fa-bullhorn"></i>
+        <span style="color:red">●</span>
+        <Icon name="bullhorn" class="inline-block text-white-25 mr-2"/>
         </span>
       <span v-else>
           {{ menuItem.name }}
@@ -37,6 +38,7 @@ import MenuItemChild from './MenuItemChild.vue';
 import type {UserProfile} from "~/services/user/types";
 import type {MenuItemType} from './menu.data'
 import {ACCOUNT_ID} from './menu.data'
+import Icon from "~/components/Icon.vue";
 
 const {data} = useAuth();
 

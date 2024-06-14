@@ -29,27 +29,27 @@ export const menuItemsLeft: MenuItemType[] = [
             {
                 'name': 'Notices of Non-Compliance',
                 'href': '#',
-                'icon': 'fa-bullhorn',
+                'icon': 'bullhorn',
             },
             {
                 'name': 'Unlawful Detainers',
                 'href': '#',
-                'icon': 'fa-inbox'
+                'icon': 'inbox'
             },
             {
                 'name': 'Court Dockets',
                 'href': '#',
-                'icon': 'fa-gavel'
+                'icon': 'gavel'
             },
             {
                 'name': 'Writs of Eviction',
                 'href': '#',
-                'icon': 'fa-truck'
+                'icon': 'truck'
             },
             {
                 'name': 'Notices of Satisfaction',
                 'href': '#',
-                'icon': 'fa-check'
+                'icon': 'check'
             },
         ],
     },
@@ -62,17 +62,17 @@ export const menuItemsLeft: MenuItemType[] = [
             {
                 'name': 'Judgment & Possession Report',
                 'href': '#',
-                'icon': 'fa-list'
+                'icon': 'list'
             },
             {
                 'name': 'Rent with Reservation Report',
                 'href': '#',
-                'icon': 'fa-list'
+                'icon': 'list'
             },
             {
                 'name': 'Unsatisfied Judgments Report',
                 'href': '#',
-                'icon': 'fa-list'
+                'icon': 'list'
             },
         ],
     },
@@ -85,7 +85,7 @@ export const menuItemsLeft: MenuItemType[] = [
             {
                 'name': 'User Accounts',
                 'href': '#',
-                'icon': 'fa-users'
+                'icon': 'users'
             },
         ],
     },
@@ -118,19 +118,19 @@ export const menuItemsRight: MenuItemType[] = [
             {
                 'name': 'Change Password',
                 'href': '#',
-                'icon': 'fa-key',
+                'icon': 'key',
                 'id': 'account-settings',
             },
             {
                 'name': 'Update Signature',
                 'href': '#',
-                'icon': 'fa-pencil',
+                'icon': 'pencil',
                 'class': 'senex-menu-update-signature'
             },
             {
                 'name': 'Logout',
                 'href': '#',
-                'icon': 'fa-coffee'
+                'icon': 'coffee'
             },
         ],
     },

@@ -2,8 +2,8 @@
   <a :class="['text-white dropdown-item', item.class]"
      :href="item.href" @click="handleClick(item)"
      :id="item.id">
+    <Icon v-if="item.icon" :name="item.icon" class="inline-block text-white"/>
 
-    <i v-if="item.icon" :class="['text-white-25 fas mr-2', item.icon]"></i>
     <span v-if="item.key === CHILD_ANNOUNCEMENT_UNREAD" style="color:red">&#x25cf;</span>
     {{ item.name }}
   </a>
@@ -12,6 +12,7 @@
 <script setup lang="ts">
 import type {Child} from "~/components/Dashboard/menu.data";
 import {CHILD_ANNOUNCEMENT_UNREAD} from "~/components/Dashboard/menu.data";
+import Icon from "~/components/Icon.vue";
 
 const {signOut} = useAuth();
 
