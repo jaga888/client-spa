@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import Announcement from "~/components/Dashboard/Announcement.vue";
+import Announcement from "~/components/dashboard/Announcement.vue";
 definePageMeta({
   layout: 'default',
 })

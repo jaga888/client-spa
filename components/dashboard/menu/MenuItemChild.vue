@@ -1,18 +1,15 @@
 <template>
   <a :class="['text-white dropdown-item', item.class]"
      :href="item.href" @click="handleClick(item)"
-     :id="item.id">
+     >
     <Icon v-if="item.icon" :name="item.icon" class="inline-block text-white"/>
-
-    <span v-if="item.key === CHILD_ANNOUNCEMENT_UNREAD" style="color:red">&#x25cf;</span>
     {{ item.name }}
   </a>
 </template>
 
 <script setup lang="ts">
-import type {Child} from "~/components/Dashboard/menu.data";
-import {CHILD_ANNOUNCEMENT_UNREAD} from "~/components/Dashboard/menu.data";
-import Icon from "~/components/Icon.vue";
+import type {Child} from "~/services/menu/types";
+import Icon from "~/components/icons/Icon.vue";
 
 const {signOut} = useAuth();
 
