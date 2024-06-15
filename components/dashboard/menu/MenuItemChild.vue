@@ -1,7 +1,8 @@
 <template>
   <a :class="['text-white dropdown-item', item.class]"
-     :href="item.href" @click="handleClick(item)"
-     >
+     :href="item.href"
+     @click="handleClick(item)"
+   >
     <Icon v-if="item.icon" :name="item.icon" class="inline-block text-white"/>
     {{ item.name }}
   </a>

@@ -14,10 +14,20 @@
 
     <div class="navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <MenuItem
-            v-for="(menuItem, index) in menuItemsLeft"
+        <MenuItemComponent
+            v-for="menuItem in menuItemsLeft"
             :menuItem="menuItem"
-            :key="index"
+            :openedMenuId="openedMenuId"
+            @click="toggleDropdown(menuItem.id)"
+        />
+      </ul>
+      <ul class="navbar-nav">
+        <MenuItemComponent
+            v-for="menuItem in menuItemsRight"
+            :menuItem="menuItem"
+            :openedMenuId="openedMenuId"
+            @click="toggleDropdown(menuItem.id)"
+            v-on-click-outside="closeMenu"
         />
       </ul>
     </div>
@@ -25,12 +35,31 @@
 </template>
 
 <script setup lang="ts">
-// import {menuItemsRight, type MenuItemType} from '../menu.data'
-import MenuItem from '~/components/dashboard/menu/MenuItem.vue';
 import type {MenuItemType} from "~/services/menu/types";
+import MenuItemComponent from "~/components/dashboard/menu/MenuItemComponent.vue";
+import type {UserProfile} from "~/services/user/types";
+import { vOnClickOutside } from '@vueuse/components';
+
+const openedMenuId = ref<number>(0);
+const toggleDropdown = (menuId: number = 0) => {
+  openedMenuId.value = openedMenuId.value === menuId ? 0 : menuId;
+};
+
+function closeMenu() {
+  toggleDropdown();
+}
+
+const {data} = useAuth();
+
+const user = ref<UserProfile>({
+  first_name: data.value?.first_name || '',
+  last_name: data.value?.last_name || '',
+  roles: data.value?.roles || []
+});
 
 const menuItemsLeft: MenuItemType[] = [
   {
+    'id': 1,
     'name': 'Processing',
     'show': false,
     'permissions': [],
@@ -63,6 +92,7 @@ const menuItemsLeft: MenuItemType[] = [
     ],
   },
   {
+    'id': 2,
     'name': 'Reporting',
     'show': false,
     'permissions': [],
@@ -85,6 +115,7 @@ const menuItemsLeft: MenuItemType[] = [
     ],
   },
   {
+    'id': 3,
     'name': 'Resources',
     'show': false,
     'permissions': ['resources'],
@@ -97,6 +128,7 @@ const menuItemsLeft: MenuItemType[] = [
     ],
   },
   {
+    'id': 4,
     'name': 'Administration',
     'show': false,
     'permissions': ['client-admin'],
@@ -105,6 +137,43 @@ const menuItemsLeft: MenuItemType[] = [
         'name': 'User Accounts',
         'href': '#',
         'icon': 'Users'
+      },
+    ],
+  },
+];
+
+const menuItemsRight: MenuItemType[] = [
+  {
+    'id': 5,
+    'prefix': '<span style="color:red">●</span>',
+    'icon': 'Bullhorn',
+    'name':  '',
+    'show': false,
+    'permissions': [],
+    'children': [
+    ],
+  },
+  {
+    'id': 6,
+    'name': user.value.first_name + ' ' + user.value.last_name,
+    'show': false,
+    'permissions': [],
+    'children': [
+      {
+        'name': 'Change Password',
+        'href': '#',
+        'icon': 'Key',
+      },
+      {
+        'name': 'Update Signature',
+        'href': '#',
+        'icon': 'Pencil',
+        'class': 'senex-menu-update-signature'
+      },
+      {
+        'name': 'Logout',
+        'href': '#',
+        'icon': 'Coffee'
       },
     ],
   },

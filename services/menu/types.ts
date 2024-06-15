@@ -7,6 +7,9 @@ export interface Child {
 }
 
 export interface MenuItemType {
+    id: number,
+    prefix?: string;
+    icon?: string;
     name: string;
     show: boolean;
     style?: string;
