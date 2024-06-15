@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import type {Child} from "~/services/menu/types";
-import Icon from "~/components/icons/Icon.vue";
+import Icon from "~/components/Icon.vue";
 
 const {signOut} = useAuth();
 

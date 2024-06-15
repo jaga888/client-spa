@@ -1,6 +1,6 @@
 <template>
   <li class="nav-item dropdown"
-      @click="toggleDropdown(menuItem)"
+      @click="toggleDropdown()"
       v-if="checkPermission(menuItem.permissions)"
   >
     <a class="nav-link dropdown-toggle"

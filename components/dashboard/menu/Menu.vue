@@ -38,75 +38,75 @@ const menuItemsLeft: MenuItemType[] = [
       {
         'name': 'Notices of Non-Compliance',
         'href': '#',
-        'icon': 'bullhorn',
+        'icon': 'Bullhorn',
       },
-      // {
-      //   'name': 'Unlawful Detainers',
-      //   'href': '#',
-      //   'icon': 'Inbox'
-      // },
-      // {
-      //   'name': 'Court Dockets',
-      //   'href': '#',
-      //   'icon': 'Gavel'
-      // },
-      // {
-      //   'name': 'Writs of Eviction',
-      //   'href': '#',
-      //   'icon': 'Truck'
-      // },
-      // {
-      //   'name': 'Notices of Satisfaction',
-      //   'href': '#',
-      //   'icon': 'Check'
-      // },
+      {
+        'name': 'Unlawful Detainers',
+        'href': '#',
+        'icon': 'Inbox'
+      },
+      {
+        'name': 'Court Dockets',
+        'href': '#',
+        'icon': 'Gavel'
+      },
+      {
+        'name': 'Writs of Eviction',
+        'href': '#',
+        'icon': 'Truck'
+      },
+      {
+        'name': 'Notices of Satisfaction',
+        'href': '#',
+        'icon': 'Check'
+      },
     ],
   },
-  // {
-  //   'name': 'Reporting',
-  //   'show': false,
-  //   'permissions': [],
-  //   'children': [
-  //     {
-  //       'name': 'Judgment & Possession Report',
-  //       'href': '#',
-  //       'icon': 'List'
-  //     },
-  //     {
-  //       'name': 'Rent with Reservation Report',
-  //       'href': '#',
-  //       'icon': 'List'
-  //     },
-  //     {
-  //       'name': 'Unsatisfied Judgments Report',
-  //       'href': '#',
-  //       'icon': 'List'
-  //     },
-  //   ],
-  // },
-  // {
-  //   'name': 'Resources',
-  //   'show': false,
-  //   'permissions': ['resources'],
-  //   'children': [
-  //     {
-  //       'name': 'Senex Wiki',
-  //       'href': '#',
-  //       'icon': 'List'
-  //     },
-  //   ],
-  // },
-  // {
-  //   'name': 'Administration',
-  //   'show': false,
-  //   'permissions': ['client-admin'],
-  //   'children': [
-  //     {
-  //       'name': 'User Accounts',
-  //       'href': '#',
-  //       'icon': 'Users'
-  //     },
-  //   ],
-  // },
+  {
+    'name': 'Reporting',
+    'show': false,
+    'permissions': [],
+    'children': [
+      {
+        'name': 'Judgment & Possession Report',
+        'href': '#',
+        'icon': 'List'
+      },
+      {
+        'name': 'Rent with Reservation Report',
+        'href': '#',
+        'icon': 'List'
+      },
+      {
+        'name': 'Unsatisfied Judgments Report',
+        'href': '#',
+        'icon': 'List'
+      },
+    ],
+  },
+  {
+    'name': 'Resources',
+    'show': false,
+    'permissions': ['resources'],
+    'children': [
+      {
+        'name': 'Senex Wiki',
+        'href': '#',
+        'icon': 'List'
+      },
+    ],
+  },
+  {
+    'name': 'Administration',
+    'show': false,
+    'permissions': ['client-admin'],
+    'children': [
+      {
+        'name': 'User Accounts',
+        'href': '#',
+        'icon': 'Users'
+      },
+    ],
+  },
 ];
 </script>
