@@ -1,7 +1,3 @@
-<style lang="scss">
-@use "/assets/scss/senex.scss";
-</style>
-
 <template>
   <div id="container">
     <div id="main" class="two-pane">
@@ -16,17 +12,22 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: 'login',
-  auth: {
-    unauthenticatedOnly: true,
-    navigateAuthenticatedTo: '/',
-  }
-})
-
 useHead({
   bodyAttrs: {
     class: 'senex__page__login',
   },
 });
 </script>
+
+<style lang="scss">
+@use "/assets/scss/senex.scss";
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.btn-primary {
+  color: #fff;
+}
+
+</style>

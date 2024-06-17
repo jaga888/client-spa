@@ -32,11 +32,6 @@ $close-text-shadow:                 none;
 @import "/node_modules/bootstrap/scss/bootstrap";
 
 // Global overrides
-
-@each $color, $value in $grays {
-  @include text-emphasis-variant(".text-gray-#{$color}", $value);
-}
-
 .text-white-25 { color: rgba(white, 0.25) !important; }
 
 // Import custom Bootstrap component styles

@@ -30,17 +30,29 @@ export default defineNuxtConfig({
     auth: {
         provider: {
             type: "local",
-            "sessionDataType": {
+            endpoints: {
+                signIn: {path: '/login', method: 'post'},
+                signOut: {path: '/logout', method: 'post'},
+                getSession: {path: '/session', method: 'get'}
+            },
+            pages: {
+                login: '/account/login'
+            },
+            sessionDataType: {
                 id: "number",
                 first_name: "string",
-                last_name: "string"
+                last_name: "string",
+                roles: "[]",
             },
             token: {
                 maxAgeInSeconds: 20000,
             }
         },
         baseURL: process.env.HOST_API,
-        globalAppMiddleware: true
+        globalAppMiddleware: {
+            isEnabled: true,
+            allow404WithoutAuth: false,
+        },
     },
     devtools: {
         enabled: true
@@ -49,5 +61,5 @@ export default defineNuxtConfig({
         configPath: "tailwind.config.js",
         exposeConfig: false,
         injectPosition: 0,
-    }
+    },
 });
