@@ -19,7 +19,7 @@
       <tr>
         <td>
           <span style="color:red">&#x25cf;</span>
-          <a class="text-warning" href="#>">
+          <a class="text-warning" href="#">
             Title2
           </a>
         </td>
@@ -29,7 +29,7 @@
       </tr>
       <tr>
         <td>
-          <a class="text-warning" href="#>">
+          <a class="text-warning" href="#">
             Title3
           </a>
         </td>

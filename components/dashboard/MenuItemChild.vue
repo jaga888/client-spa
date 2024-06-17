@@ -10,8 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import type {Child} from "~/components/Dashboard/menu.data";
-import {CHILD_ANNOUNCEMENT_UNREAD} from "~/components/Dashboard/menu.data";
+import type {Child} from "~/components/dashboard/menu.data";
+import {CHILD_ANNOUNCEMENT_UNREAD} from "~/components/dashboard/menu.data";
 import Icon from "~/components/Icon.vue";
 
 const {signOut} = useAuth();
