@@ -6,6 +6,7 @@ export interface UserLogin {
 export interface UserProfile {
     first_name: string
     last_name: string
+    roles: { id: number, name: string }[]
 }
 
 export interface UserResetPassword {

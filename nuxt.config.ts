@@ -38,10 +38,11 @@ export default defineNuxtConfig({
             pages: {
                 login: '/account/login'
             },
-            "sessionDataType": {
+            sessionDataType: {
                 id: "number",
                 first_name: "string",
-                last_name: "string"
+                last_name: "string",
+                roles: "[]",
             },
             token: {
                 maxAgeInSeconds: 20000,
