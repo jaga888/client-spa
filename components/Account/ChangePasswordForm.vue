@@ -13,9 +13,9 @@
       <div class="form-group">
         <label class="form-label" for="password_confirm">Confirm</label>
         <input type="password" class="form-control" id="modal_password_confirm" placeholder="Confirm password..."
-               v-model="passwords.confirmPassword"
-               :class="{'is-invalid': v$.confirmPassword.$invalid && v$.confirmPassword.$dirty}" required>
-        <div v-if="v$.confirmPassword.$invalid && v$.confirmPassword.$dirty" class="invalid-feedback">
+               v-model="passwords.passwordConfirm"
+               :class="{'is-invalid': v$.passwordConfirm.$invalid && v$.passwordConfirm.$dirty}" required>
+        <div v-if="v$.passwordConfirm.$invalid && v$.passwordConfirm.$dirty" class="invalid-feedback">
           Confirm Password is required and should match the New Password.
         </div>
       </div>
@@ -44,12 +44,12 @@ const props = defineProps({
 
 const passwords = ref<ChangePassword>({
   password: "",
-  confirmPassword: "",
+  passwordConfirm: "",
 });
 
 const rules = {
   password: {required},
-  confirmPassword: {required},
+  passwordConfirm: {required},
 };
 const $externalResults = ref<ForgotPassword>({
   'message': ''
@@ -66,9 +66,9 @@ const submitChangePassword = async () => {
   // console.log(validated);
   if (validated) {
     try {
-      <ChangePassword>(await userService.changePasswordApi(passwords.value.password, passwords.value.confirmPassword));
+      <ChangePassword>(await userService.changePasswordApi(passwords.value.password, passwords.value.passwordConfirm));
       successMessage.value.show = true;
-      console.log(passwords.value.password, passwords.value.confirmPassword);
+      console.log(passwords.value.password, passwords.value.passwordConfirm);
     } catch (e: any) {
       $externalResults.value = e.response._data;
     }

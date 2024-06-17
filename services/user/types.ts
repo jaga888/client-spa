@@ -18,5 +18,5 @@ export interface ForgotPassword {
 
 export interface ChangePassword {
     password: string
-    confirmPassword: string
+    passwordConfirm: string
 }

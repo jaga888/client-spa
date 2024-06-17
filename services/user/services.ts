@@ -10,11 +10,11 @@ export const userService = {
             body: JSON.stringify({email}),
         })
     },
-    changePasswordApi: (password: string, confirmPassword: string) => {
+    changePasswordApi: (password: string, passwordConfirm: string) => {
 
         return api(routes.changePassword.path, {
             method: 'POST',
-            body: JSON.stringify({password, confirmPassword}),
+            body: JSON.stringify({password, passwordConfirm}),
         })
     }
 }
