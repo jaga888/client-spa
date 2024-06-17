@@ -1,8 +1,8 @@
 <template>
   <a :class="['text-white dropdown-item', item.class]"
-     :href="item.href"
-     @click="handleClick(item)"
-   >
+
+     @click.prevent="handleClick(item)"
+  >
     <Icon v-if="item.icon" :name="item.icon" class="inline-block text-white"/>
     {{ item.name }}
   </a>
@@ -24,6 +24,9 @@ defineProps({
 const handleClick = (item: Child) => {
   if (item.name == 'Logout') {
     logout()
+  }
+  if (item.click) {
+    item.click();
   }
 }
 

@@ -1,30 +1,36 @@
 <template>
-  <form novalidate @submit.prevent="submitChangePassword">
-    <fieldset>
-      <div class="form-group">
-        <label class="form-label" for="password">New Password</label>
-        <input type="password" class="form-control" id="modal_password" placeholder="New password..."
-               v-model="passwords.password" :class="{'is-invalid': v$.password.$invalid && v$.password.$dirty}"
-               required>
-        <div v-if="v$.password.$invalid && v$.password.$dirty" class="invalid-feedback">
-          Password is required.
+  <div>
+    <form v-if="!successMessage.show" novalidate @submit.prevent="submitChangePassword">
+      <fieldset>
+        <div class="form-group">
+          <label class="form-label" for="password">New Password</label>
+          <input type="password" class="form-control" id="modal_password" placeholder="New password..."
+                 v-model="passwords.password" :class="{'is-invalid': v$.password.$invalid && v$.password.$dirty}"
+                 required>
+          <div v-if="v$.password.$invalid && v$.password.$dirty" class="invalid-feedback">
+            Password is required.
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="password_confirm">Confirm</label>
-        <input type="password" class="form-control" id="modal_password_confirm" placeholder="Confirm password..."
-               v-model="passwords.passwordConfirm"
-               :class="{'is-invalid': v$.passwordConfirm.$invalid && v$.passwordConfirm.$dirty}" required>
-        <div v-if="v$.passwordConfirm.$invalid && v$.passwordConfirm.$dirty" class="invalid-feedback">
-          Confirm Password is required and should match the New Password.
+        <div class="form-group">
+          <label class="form-label" for="password_confirm">Confirm</label>
+          <input type="password" class="form-control" id="modal_password_confirm" placeholder="Confirm password..."
+                 v-model="passwords.passwordConfirm"
+                 :class="{'is-invalid': v$.passwordConfirm.$invalid && v$.passwordConfirm.$dirty}" required>
+          <div v-if="v$.passwordConfirm.$invalid && v$.passwordConfirm.$dirty" class="invalid-feedback">
+            Confirm Password is required and should match the New Password.
+          </div>
         </div>
-      </div>
-    </fieldset>
-  </form>
-  <div class="modal-footer">
-    <button @click.prevent="closeModal" class="btn btn-link">Cancel
-    </button>
-    <button @click.prevent="submitChangePassword" class="btn btn-primary">Update</button>
+      </fieldset>
+    </form>
+    <div v-if="successMessage.show" class="alert alert-success">
+      Password changed successfully!
+    </div>
+    <div class="modal-footer">
+      <button v-if="!successMessage.show" @click.prevent="setStatusModal(false)" class="btn btn-link">
+        Cancel
+      </button>
+      <button v-if="!successMessage.show" @click.prevent="submitChangePassword" class="btn btn-primary">Update</button>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -34,51 +40,35 @@ import {useVuelidate} from "@vuelidate/core";
 import {ref} from "vue";
 import type {ChangePassword, ForgotPassword} from "~/services/user/types";
 import {userService} from "~/services/user/services";
+import {useMenuStore} from "~/store/menu";
 
+const {setStatusModal} = useMenuStore();
 
-const emits = defineEmits(['close', 'submit']);
-
-const props = defineProps({
-  isChangePasswordModalOpen: Boolean
-});
-
-const passwords = ref<ChangePassword>({
-  password: "",
-  passwordConfirm: "",
-});
+const passwords = ref<ChangePassword>({password: "", passwordConfirm: ""});
+const successMessage = ref({show: false});
 
 const rules = {
   password: {required},
   passwordConfirm: {required},
 };
-const $externalResults = ref<ForgotPassword>({
-  'message': ''
-});
 
-const successMessage = ref({
-  show: false
-});
-
+const $externalResults = ref<ForgotPassword>({'message': ''});
 const v$ = useVuelidate(rules, passwords, {$externalResults});
+
 const submitChangePassword = async () => {
   const validated = await v$.value.$validate();
-  // console.log(passwords.value.password, passwords.value.confirmPassword);
-  // console.log(validated);
   if (validated) {
     try {
       <ChangePassword>(await userService.changePasswordApi(passwords.value.password, passwords.value.passwordConfirm));
       successMessage.value.show = true;
-      console.log(passwords.value.password, passwords.value.passwordConfirm);
+      setTimeout(() => {
+        setStatusModal(false);
+      }, 4000);
     } catch (e: any) {
       $externalResults.value = e.response._data;
     }
   }
 };
-
-// const closeModal = () => {
-//   emits('close');
-// };
-
 </script>
 
 <style scoped lang="scss">
@@ -104,4 +94,12 @@ const submitChangePassword = async () => {
   color: white;
 }
 
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  padding: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
 </style>

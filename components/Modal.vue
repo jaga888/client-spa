@@ -1,40 +1,35 @@
 <template>
-  <div v-if="isModalOpen" class="modal-backdrop fade show"></div>
-  <div v-if="isModalOpen" class="modal fade show" tabindex="-1" role="dialog">
+  <div v-if="isOpen" class="modal-backdrop fade show"></div>
+  <div v-if="isOpen" class="modal fade show" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Change Password</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                  @click.prevent="closeModal">
+                  @click.prevent="setStatusModal(false)">
             <span aria-hidden="true">×</span>
           </button>
         </div>
         <div class="modal-body">
-          <change-password-form
-              :isChangePasswordModalOpen="isModalOpen"
-              @closeModal="closeModal"
-          />
+          <change-password-form/>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import ChangePasswordForm from "~/components/Account/ChangePasswordForm.vue";
+import {useMenuStore} from "~/store/menu";
+import ChangePasswordForm from "~/components/account/ChangePasswordForm.vue";
 
-const emits = defineEmits(['close']);
+const {setStatusModal} = useMenuStore();
+const {isOpen} = storeToRefs(useMenuStore());
 
-const props = defineProps({
-  isModalOpen: Boolean
-});
-const closeModal = () => {
-  emits('close');
-};
 </script>
 
 <style scoped lang="scss">
-$blue:                              #1088CB;
+
+$blue: #1088CB;
+
 .modal.fade.show {
   display: block;
 }
