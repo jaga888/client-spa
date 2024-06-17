@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import Menu from "~/components/Dashboard/Menu.vue";
+import Menu from "~/components/dashboard/menu/Menu.vue";
 useHead({
   bodyAttrs: {
     class: 'processing',
