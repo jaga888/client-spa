@@ -32,13 +32,15 @@
       </ul>
     </div>
   </nav>
+  <Modal/>
 </template>
 
 <script setup lang="ts">
 import type {MenuItemType} from "~/services/menu/types";
 import MenuItemComponent from "~/components/dashboard/menu/MenuItemComponent.vue";
 import type {UserProfile} from "~/services/user/types";
-import { vOnClickOutside } from '@vueuse/components';
+import {vOnClickOutside} from '@vueuse/components';
+import {useMenuStore} from "~/store/menu";
 
 const openedMenuId = ref<number>(0);
 const toggleDropdown = (menuId: number = 0) => {
@@ -56,6 +58,7 @@ const user = ref<UserProfile>({
   last_name: data.value?.last_name || '',
   roles: data.value?.roles || []
 });
+const {setStatusModal} = useMenuStore();
 
 const menuItemsLeft: MenuItemType[] = [
   {
@@ -66,27 +69,27 @@ const menuItemsLeft: MenuItemType[] = [
     'children': [
       {
         'name': 'Notices of Non-Compliance',
-        'href': '#',
+        'href': '',
         'icon': 'Bullhorn',
       },
       {
         'name': 'Unlawful Detainers',
-        'href': '#',
+        'href': '',
         'icon': 'Inbox'
       },
       {
         'name': 'Court Dockets',
-        'href': '#',
+        'href': '',
         'icon': 'Gavel'
       },
       {
         'name': 'Writs of Eviction',
-        'href': '#',
+        'href': '',
         'icon': 'Truck'
       },
       {
         'name': 'Notices of Satisfaction',
-        'href': '#',
+        'href': '',
         'icon': 'Check'
       },
     ],
@@ -99,17 +102,17 @@ const menuItemsLeft: MenuItemType[] = [
     'children': [
       {
         'name': 'Judgment & Possession Report',
-        'href': '#',
+        'href': '',
         'icon': 'List'
       },
       {
         'name': 'Rent with Reservation Report',
-        'href': '#',
+        'href': '',
         'icon': 'List'
       },
       {
         'name': 'Unsatisfied Judgments Report',
-        'href': '#',
+        'href': '',
         'icon': 'List'
       },
     ],
@@ -122,7 +125,7 @@ const menuItemsLeft: MenuItemType[] = [
     'children': [
       {
         'name': 'Senex Wiki',
-        'href': '#',
+        'href': '',
         'icon': 'List'
       },
     ],
@@ -135,23 +138,23 @@ const menuItemsLeft: MenuItemType[] = [
     'children': [
       {
         'name': 'User Accounts',
-        'href': '#',
+        'href': '',
         'icon': 'Users'
       },
     ],
   },
 ];
 
+
 const menuItemsRight: MenuItemType[] = [
   {
     'id': 5,
     'prefix': '<span style="color:red">●</span>',
     'icon': 'Bullhorn',
-    'name':  '',
+    'name': '',
     'show': false,
     'permissions': [],
-    'children': [
-    ],
+    'children': [],
   },
   {
     'id': 6,
@@ -161,18 +164,19 @@ const menuItemsRight: MenuItemType[] = [
     'children': [
       {
         'name': 'Change Password',
-        'href': '#',
+        'href': '',
         'icon': 'Key',
+        'click': () => setStatusModal(true),
       },
       {
         'name': 'Update Signature',
-        'href': '#',
+        'href': '',
         'icon': 'Pencil',
         'class': 'senex-menu-update-signature'
       },
       {
         'name': 'Logout',
-        'href': '#',
+        'href': '',
         'icon': 'Coffee'
       },
     ],

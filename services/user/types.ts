@@ -16,3 +16,8 @@ export interface UserResetPassword {
 export interface ForgotPassword {
     message: string,
 }
+
+export interface ChangePassword {
+    password: string
+    passwordConfirm: string
+}
