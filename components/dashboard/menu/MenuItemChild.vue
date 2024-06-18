@@ -1,11 +1,8 @@
 <template>
-  <a :class="['text-white dropdown-item', item.class]"
-
-     @click.prevent="handleClick(item)"
-  >
+  <NuxtLink :to="item.href" :class="['text-white dropdown-item', item.class]" @click="handleClick(item)">
     <Icon v-if="item.icon" :name="item.icon" class="inline-block text-white"/>
     {{ item.name }}
-  </a>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
@@ -31,7 +28,7 @@ const handleClick = (item: Child) => {
 }
 
 const logout = async () => {
-  await signOut();
+  await signOut({ callbackUrl: '/account/login'});
 };
 
 </script>
