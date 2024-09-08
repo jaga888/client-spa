@@ -135,7 +135,7 @@ const menuItemsLeft: MenuItemType[] = [
     'children': [
       {
         'name': 'User Accounts',
-        'href': '#',
+        'href': '/admin/user/list',
         'icon': 'Users'
       },
     ],
