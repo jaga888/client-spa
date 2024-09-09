@@ -1,6 +1,7 @@
 <template>
   <div id="container">
     <Menu></Menu>
+    <ImportantAnnouncement :showImportantAnnouncement="true"/>
     <div id="main" class="two-pane">
       <slot/>
     </div>
@@ -14,6 +15,8 @@
 
 <script setup lang="ts">
 import Menu from "~/components/dashboard/menu/Menu.vue";
+import ImportantAnnouncement from "~/components/dashboard/ImportantAnnouncement.vue";
+
 useHead({
   bodyAttrs: {
     class: 'processing',
@@ -23,6 +26,10 @@ useHead({
 
 <style lang="scss">
 @use "/assets/scss/senex.scss";
+
+.navbar {
+  padding: 0.5rem 1rem;
+}
 
 .navbar-dark {
   .navbar-brand {

@@ -12,7 +12,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="navbar-collapse" id="navbarSupportedContent">
+    <div class="navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <MenuItemComponent
             v-for="menuItem in menuItemsLeft"
@@ -32,13 +32,17 @@
       </ul>
     </div>
   </nav>
+  <Modal/>
 </template>
 
 <script setup lang="ts">
 import type {MenuItemType} from "~/services/menu/types";
 import MenuItemComponent from "~/components/dashboard/menu/MenuItemComponent.vue";
 import type {UserProfile} from "~/services/user/types";
-import { vOnClickOutside } from '@vueuse/components';
+import {vOnClickOutside} from '@vueuse/components';
+import {useMenuStore} from "~/store/menu";
+import type {Announcement} from "~/services/user/types";
+import {ref} from "vue";
 
 const openedMenuId = ref<number>(0);
 const toggleDropdown = (menuId: number = 0) => {
@@ -48,14 +52,26 @@ const toggleDropdown = (menuId: number = 0) => {
 function closeMenu() {
   toggleDropdown();
 }
-
+const announcements = ref<Announcement[]>([]);
 const {data} = useAuth();
+
+onMounted(async () => {
+  try {
+    const response = await fetch('/api/announcements');
+    const data = await response.json();
+    data.sort((a: Announcement, b: Announcement) => new Date(b.createdAt.date).getTime() - new Date(a.createdAt.date).getTime());
+    announcements.value = data;
+  } catch (error) {
+    console.error('Error fetching announcements:', error);
+  }
+});
 
 const user = ref<UserProfile>({
   first_name: data.value?.first_name || '',
   last_name: data.value?.last_name || '',
   roles: data.value?.roles || []
 });
+const {setStatusModal} = useMenuStore();
 
 const menuItemsLeft: MenuItemType[] = [
   {
@@ -66,27 +82,27 @@ const menuItemsLeft: MenuItemType[] = [
     'children': [
       {
         'name': 'Notices of Non-Compliance',
-        'href': '#',
+        'href': '',
         'icon': 'Bullhorn',
       },
       {
         'name': 'Unlawful Detainers',
-        'href': '#',
+        'href': '',
         'icon': 'Inbox'
       },
       {
         'name': 'Court Dockets',
-        'href': '#',
+        'href': '',
         'icon': 'Gavel'
       },
       {
         'name': 'Writs of Eviction',
-        'href': '#',
+        'href': '',
         'icon': 'Truck'
       },
       {
         'name': 'Notices of Satisfaction',
-        'href': '#',
+        'href': '',
         'icon': 'Check'
       },
     ],
@@ -99,17 +115,17 @@ const menuItemsLeft: MenuItemType[] = [
     'children': [
       {
         'name': 'Judgment & Possession Report',
-        'href': '#',
+        'href': '',
         'icon': 'List'
       },
       {
         'name': 'Rent with Reservation Report',
-        'href': '#',
+        'href': '',
         'icon': 'List'
       },
       {
         'name': 'Unsatisfied Judgments Report',
-        'href': '#',
+        'href': '',
         'icon': 'List'
       },
     ],
@@ -122,7 +138,7 @@ const menuItemsLeft: MenuItemType[] = [
     'children': [
       {
         'name': 'Senex Wiki',
-        'href': '#',
+        'href': '',
         'icon': 'List'
       },
     ],
@@ -147,11 +163,14 @@ const menuItemsRight: MenuItemType[] = [
     'id': 5,
     'prefix': '<span style="color:red">●</span>',
     'icon': 'Bullhorn',
-    'name':  '',
+    'name': '',
     'show': false,
     'permissions': [],
-    'children': [
-    ],
+    'children': announcements.value.map(announcement => ({
+      name: announcement.title,
+      href: `/announcement/${announcement.id}`,
+      unread: announcement.unread
+    })),
   },
   {
     'id': 6,
@@ -161,21 +180,39 @@ const menuItemsRight: MenuItemType[] = [
     'children': [
       {
         'name': 'Change Password',
-        'href': '#',
+        'href': '',
         'icon': 'Key',
+        'click': () => setStatusModal(true),
       },
       {
         'name': 'Update Signature',
-        'href': '#',
+        'href': '',
         'icon': 'Pencil',
         'class': 'senex-menu-update-signature'
       },
       {
         'name': 'Logout',
-        'href': '#',
+        'href': '',
         'icon': 'Coffee'
       },
     ],
   },
 ];
 </script>
+
+<style scoped lang="scss">
+
+.navbar {
+  padding: 8px 16px;
+}
+
+.navbar-nav {
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 767.98px) {
+  .navbar-nav {
+    flex-direction: column;
+  }
+}
+</style>
