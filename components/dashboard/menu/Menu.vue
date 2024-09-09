@@ -12,7 +12,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="navbar-collapse" id="navbarSupportedContent">
+    <div class="navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <MenuItemComponent
             v-for="menuItem in menuItemsLeft"
@@ -41,6 +41,8 @@ import MenuItemComponent from "~/components/dashboard/menu/MenuItemComponent.vue
 import type {UserProfile} from "~/services/user/types";
 import {vOnClickOutside} from '@vueuse/components';
 import {useMenuStore} from "~/store/menu";
+import type {Announcement} from "~/services/user/types";
+import {ref} from "vue";
 
 const openedMenuId = ref<number>(0);
 const toggleDropdown = (menuId: number = 0) => {
@@ -50,8 +52,19 @@ const toggleDropdown = (menuId: number = 0) => {
 function closeMenu() {
   toggleDropdown();
 }
-
+const announcements = ref<Announcement[]>([]);
 const {data} = useAuth();
+
+onMounted(async () => {
+  try {
+    const response = await fetch('/api/announcements');
+    const data = await response.json();
+    data.sort((a: Announcement, b: Announcement) => new Date(b.createdAt.date).getTime() - new Date(a.createdAt.date).getTime());
+    announcements.value = data;
+  } catch (error) {
+    console.error('Error fetching announcements:', error);
+  }
+});
 
 const user = ref<UserProfile>({
   first_name: data.value?.first_name || '',
@@ -145,7 +158,6 @@ const menuItemsLeft: MenuItemType[] = [
   },
 ];
 
-
 const menuItemsRight: MenuItemType[] = [
   {
     'id': 5,
@@ -154,7 +166,11 @@ const menuItemsRight: MenuItemType[] = [
     'name': '',
     'show': false,
     'permissions': [],
-    'children': [],
+    'children': announcements.value.map(announcement => ({
+      name: announcement.title,
+      href: `/announcement/${announcement.id}`,
+      unread: announcement.unread
+    })),
   },
   {
     'id': 6,
@@ -183,3 +199,20 @@ const menuItemsRight: MenuItemType[] = [
   },
 ];
 </script>
+
+<style scoped lang="scss">
+
+.navbar {
+  padding: 8px 16px;
+}
+
+.navbar-nav {
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 767.98px) {
+  .navbar-nav {
+    flex-direction: column;
+  }
+}
+</style>

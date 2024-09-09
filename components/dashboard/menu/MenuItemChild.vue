@@ -28,7 +28,15 @@ const handleClick = (item: Child) => {
 }
 
 const logout = async () => {
-  await signOut({ callbackUrl: '/account/login'});
+  await signOut({callbackUrl: '/account/login'});
 };
 
 </script>
+
+<style>
+
+.inline-block {
+  opacity: .5;
+}
+
+</style>

@@ -21,3 +21,12 @@ export interface ChangePassword {
     password: string
     passwordConfirm: string
 }
+
+export interface Announcement {
+    id: number
+    title: string
+    createdAt: {
+        date: string;
+    };
+    unread: boolean
+}

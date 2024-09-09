@@ -49,6 +49,29 @@ defineProps({
 
 const checkPermission = (itemPermissions: string[]) => {
   return itemPermissions.length === 0
-    || itemPermissions.some(permission => user.value.roles.some(userRole => userRole.name === permission));
+      || itemPermissions.some(permission => user.value.roles.some(userRole => userRole.name === permission));
 };
 </script>
+<style>
+
+.dropdown-menu {
+  max-height: 100px;
+  overflow-y: auto;
+  right: 0;
+}
+
+.nav-item .dropdown-menu {
+  display: none;
+  background-color: rgb(16, 136, 203);
+}
+.nav-item.show .dropdown-menu {
+  display: block;
+}
+.dropdown-item {
+  color: #fff;
+}
+.dropdown-item span {
+  margin-right: 8px;
+  color: red;
+}
+</style>
