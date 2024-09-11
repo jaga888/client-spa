@@ -1,8 +1,8 @@
 <template>
-  <NuxtLink :to="item.href" :class="['text-white dropdown-item', item.class]" @click="handleClick(item)">
+  <a :href="item.href" :class="['text-white dropdown-item', item.class]" @click="handleClick(item)">
     <Icon v-if="item.icon" :name="item.icon" class="inline-block text-white"/>
     {{ item.name }}
-  </NuxtLink>
+  </a>
 </template>
 
 <script setup lang="ts">
