@@ -48,6 +48,7 @@ defineProps({
 });
 
 const checkPermission = (itemPermissions: string[]) => {
+  console.log(user.value);
   return itemPermissions.length === 0
       || itemPermissions.some(permission => user.value.roles.some(userRole => userRole.name === permission));
 };
@@ -55,9 +56,10 @@ const checkPermission = (itemPermissions: string[]) => {
 <style>
 
 .dropdown-menu {
-  max-height: 100px;
-  overflow-y: auto;
-  right: 0;
+  //max-height: 150px;
+  overflow: auto;
+  left: 0;
+  //top: 45px;
 }
 
 .nav-item .dropdown-menu {

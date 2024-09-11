@@ -45,13 +45,25 @@ import type {Announcement} from "~/services/user/types";
 import {ref} from "vue";
 
 const openedMenuId = ref<number>(0);
+const isNavbarOpen = ref(false);
+const isModalOpen = ref(false);
+
 const toggleDropdown = (menuId: number = 0) => {
   openedMenuId.value = openedMenuId.value === menuId ? 0 : menuId;
 };
 
+const toggleNavbar = () => {
+  isNavbarOpen.value = !isNavbarOpen.value;
+};
+
 function closeMenu() {
-  toggleDropdown();
+  openedMenuId.value = 0;
 }
+
+function closeModal() {
+  isModalOpen.value = false;
+}
+
 const announcements = ref<Announcement[]>([]);
 const {data} = useAuth();
 
@@ -71,6 +83,7 @@ const user = ref<UserProfile>({
   last_name: data.value?.last_name || '',
   roles: data.value?.roles || []
 });
+
 const {setStatusModal} = useMenuStore();
 
 const menuItemsLeft: MenuItemType[] = [
@@ -108,6 +121,39 @@ const menuItemsLeft: MenuItemType[] = [
     ],
   },
   {
+    'id': 3,
+    'name': 'Accounting',
+    'show': false,
+    'permissions': ['firm-manager'],
+    'children': [
+      {
+        'name': 'New Client Billing',
+        'href': '',
+        'icon': 'List'
+      },
+      {
+        'name': 'Daily Costs Report',
+        'href': '',
+        'icon': 'List'
+      },
+      {
+        'name': 'Military Legal Representation Report',
+        'href': '',
+        'icon': 'List'
+      },
+      {
+        'name': 'Marston Service Costs Report',
+        'href': '',
+        'icon': 'List'
+      },
+      {
+        'name': 'Clio Report',
+        'href': '',
+        'icon': 'List'
+      },
+    ],
+  },
+  {
     'id': 2,
     'name': 'Reporting',
     'show': false,
@@ -131,31 +177,42 @@ const menuItemsLeft: MenuItemType[] = [
     ],
   },
   {
-    'id': 3,
-    'name': 'Resources',
-    'show': false,
-    'permissions': ['resources'],
-    'children': [
-      {
-        'name': 'Senex Wiki',
-        'href': '',
-        'icon': 'List'
-      },
-    ],
-  },
-  {
     'id': 4,
     'name': 'Administration',
     'show': false,
     'permissions': ['client-admin'],
     'children': [
       {
-        'name': 'User Accounts',
+        'name': 'Users',
         'href': '/admin/user/list',
         'icon': 'Users'
       },
     ],
   },
+  {
+    'id': 5,
+    'name': 'Management',
+    'show': false,
+    'permissions': ['firm-manager','super-admin'],
+    'children': [
+      {
+        'name': 'Companies',
+        'href': '/admin/company/list',
+        'icon': 'List'
+      },
+      {
+        'name': 'Properties',
+        'href': '/admin/property/list',
+        'icon': 'Check'
+      },
+      {
+        'name': 'Users',
+        'href': '/admin/user/list',
+        'icon': 'Users'
+      },
+    ],
+  },
+
 ];
 
 const menuItemsRight: MenuItemType[] = [
@@ -198,12 +255,33 @@ const menuItemsRight: MenuItemType[] = [
     ],
   },
 ];
+
+function adjustDropdownPosition(dropdown) {
+  const rect = dropdown.getBoundingClientRect();
+  const viewportWidth = window.innerWidth;
+
+  if (rect.right > viewportWidth) {
+    dropdown.style.left = "auto";
+    dropdown.style.right = "0";
+  }
+}
+
+document.querySelectorAll('.dropdown-menu').forEach(dropdown => {
+  dropdown.addEventListener('mouseenter', function () {
+    adjustDropdownPosition(this);
+  });
+});
 </script>
 
 <style scoped lang="scss">
+.nav-item {
+  font-size: 15px !important;
+  font-weight: 550 !important;
+}
 
 .navbar {
   padding: 8px 16px;
+  height: 56px;
 }
 
 .navbar-nav {
